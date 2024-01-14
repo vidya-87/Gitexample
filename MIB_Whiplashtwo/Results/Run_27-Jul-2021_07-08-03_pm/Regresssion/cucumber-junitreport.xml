@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<testsuite failures="0" name="cucumber.runtime.formatter.JUnitFormatter" skipped="0" tests="8" time="1562.814202">
+    <testcase classname="Journey 27" name="Prouser Submit a Claim as passenger in bus" time="557.021871">
+        <system-out><![CDATA[Given prouser logins into whiplash application..............................passed
+When prouser enter all mandatory details for claim creation as 'A passenger on a bus' and 'NO' and 'NO'.passed
+Then claim is created for prouser...........................................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 27" name="Compensator receives claim and claim liability sent to TPA" time="96.933727">
+        <system-out><![CDATA[Given Claim  is sent to the compensator.....................................passed
+When compensator receives claim and send to TPA.............................passed
+Then claims acceptance and liability decision is now sent to TPA............passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 27" name="TPA accepts full liability" time="157.782821">
+        <system-out><![CDATA[Given Login as TPA..........................................................passed
+When TPA accepts full liability.............................................passed
+Then claims acceptance and liability information is passed to claimant......passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 27" name="Claimant add losses and fee" time="162.827106">
+        <system-out><![CDATA[Given claim liability is accepted...........................................passed
+When 'prouser' add losses and fee...........................................passed
+Then claim will proceed to upload medical reports...........................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 27" name="Prouser  uploads medical Report" time="261.483369">
+        <system-out><![CDATA[Given 'prouser' receives claim..............................................passed
+When claimant uploads medical report at 'Pending-Medical'...................passed
+Then report is uploaded and sent to compensator.............................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 27" name="TPA disputes causation at offer and decides not to make any offer" time="148.24592">
+        <system-out><![CDATA[Given claimant requests offer to TPA........................................passed
+When TPA disputes causation at offer........................................passed
+Then claim is sent to claimant..............................................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 27" name="Claimant accepts the decision and no offer is made" time="98.215524">
+        <system-out><![CDATA[Given TPA has disputed causation for prouser................................passed
+When Prouser accepts the dispute causation no offer.........................passed
+Then claim moves to Resolved-NoOffer........................................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 27" name="The claim is moved to 'Resolved-NoOffer'" time="80.303864">
+        <system-out><![CDATA[Given 'prouser' goes to court...............................................passed
+When prouser claim status is 'Resolved-NoOffer'.............................passed
+Then claim is resolved......................................................passed
+]]></system-out>
+    </testcase>
+</testsuite>

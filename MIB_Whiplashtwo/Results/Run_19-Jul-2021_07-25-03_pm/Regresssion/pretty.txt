@@ -1,0 +1,159 @@
+@prouser
+Feature: Journey 25
+
+  Scenario Outline: Prouser Submit a Claim as passenger in bus                                                           # src/test/resources/features/prouser/journey25.feature:4
+    Given prouser logins into whiplash application
+    When prouser enter all mandatory details for claim creation as '<involvement_type_v>' and '<owner>' and '<multivrn>'
+    Then claim is created for prouser
+
+    Examples: 
+
+  @prouser
+  Scenario Outline: Prouser Submit a Claim as passenger in bus                                     # src/test/resources/features/prouser/journey25.feature:11
+    Given prouser logins into whiplash application                                                 # ProUserActionsStepDefs.prouser_logins_into_whiplash_applicataion_using()
+    When prouser enter all mandatory details for claim creation as 'The driver' and 'YES' and 'NO' # ProUserActionsStepDefs.prouser_Enter_All_Mandatory_Details_For_Claim_Creation(String,String,String)
+    Then claim is created for prouser                                                              # ProUserActionsStepDefs.claim_Is_Created()
+
+  Scenario: Compensator receives claim and claim liability sent to TPA # src/test/resources/features/prouser/journey25.feature:13
+    Given Claim  is sent to the compensator                            # CompensatorStepDefs.claim_is_sent_to_the_compensator()
+    When compensator receives claim and send to TPA                    # CompensatorStepDefs.compensator_receives_claim_send_TPA()
+    Then claims acceptance and liability decision is now sent to TPA   # CompensatorStepDefs.claims_acceptance_liability_decision_sent_TPA()
+
+  Scenario: TPA disputes causation and admits part liability               # src/test/resources/features/prouser/journey25.feature:18
+    Given Login as TPA                                                     # TPAStepDefs.login_As_TPA()
+    When TPA accepts full liability                                        # TPAStepDefs.tpa_accepts_full_liability()
+    Then claims acceptance and liability information is passed to claimant # TPAStepDefs.claims_Acceptance_Denied_Liability_passedto_claimant()
+
+  Scenario Outline: Prouser  uploads medical Report with waitout prognosis and release report to TPA # src/test/resources/features/prouser/journey25.feature:23
+    Given '<claimant>' receives claim
+    When prouser uploads the medical report with waitout prognosis '<status>' and decides to waitout
+    Then report is uploaded and sent to compensator
+
+    Examples: 
+
+  @prouser
+  Scenario Outline: Prouser  uploads medical Report with waitout prognosis and release report to TPA        # src/test/resources/features/prouser/journey25.feature:30
+    Given 'prouser' receives claim                                                                          # ClaimantActionsStepDefs.user_Receives_Claim(String)
+    When prouser uploads the medical report with waitout prognosis 'Pending-Medical' and decides to waitout # ProUserActionsStepDefs.claimant_upload_medical_report(String)
+    Then report is uploaded and sent to compensator                                                         # ProUserActionsStepDefs.report_sent_to_compensator()
+
+  Scenario: Prouser proceeds with offer during prognosis period              # src/test/resources/features/prouser/journey25.feature:32
+    Given claimant is in prognosis period                                    # ProUserActionsStepDefs.claimant_is_in_prognosis_period()
+    When claimant decides to proceed with offer during prognosis period      # ProUserActionsStepDefs.claimant_decides_to_proceed_with_offer_during_prognosis_period()
+    Then medical report is uploaded and offer request is sent to compensator # ClaimantActionsStepDefs.uploaded_report_uplift_request_to_compensator()
+
+  Scenario: TPA First Offer to Prouser # src/test/resources/features/prouser/journey25.feature:38
+    Given Login as TPA                 # TPAStepDefs.login_As_TPA()
+    When the TPA makes first offer     # TPAStepDefs.tpa_makes_first_offer()
+    Then offer is sent to claimant     # CompensatorStepDefs.first_offer_claimant()
+
+  Scenario Outline: Prouser rejects the first offer to Compensator # src/test/resources/features/prouser/journey25.feature:44
+    Given '<claimant>' receives new offer
+    When '<claimant>' reject the offer
+    Then counter offer is sent for revision
+
+    Examples: 
+
+  @prouser
+  Scenario Outline: Prouser rejects the first offer to Compensator # src/test/resources/features/prouser/journey25.feature:50
+    Given 'prouser' receives new offer                             # ClaimantActionsStepDefs.receives_new_offer(String)
+    When 'prouser' reject the offer                                # ClaimantActionsStepDefs.reject_first_offer(String)
+    Then counter offer is sent for revision                        # ClaimantActionsStepDefs.counter_offer_sent_for_revision()
+
+  Scenario: TPA reject claimant counter offer and makes new offer(Second offer) # src/test/resources/features/prouser/journey25.feature:53
+    Given Login as TPA                                                          # TPAStepDefs.login_As_TPA()
+    When the TPA send updated offer                                             # TPAStepDefs.tpa_send_updated_offer()
+    Then offer is sent to claimant                                              # CompensatorStepDefs.first_offer_claimant()
+
+  Scenario Outline: Prouser rejects the second offer to Compensator # src/test/resources/features/prouser/journey25.feature:59
+    Given '<claimant>' receives new offer
+    When '<claimant>' reject the offer
+    Then counter offer is sent for revision
+
+    Examples: 
+
+  @prouser
+  Scenario Outline: Prouser rejects the second offer to Compensator # src/test/resources/features/prouser/journey25.feature:65
+    Given 'prouser' receives new offer                              # ClaimantActionsStepDefs.receives_new_offer(String)
+    When 'prouser' reject the offer                                 # ClaimantActionsStepDefs.reject_first_offer(String)
+    Then counter offer is sent for revision                         # ClaimantActionsStepDefs.counter_offer_sent_for_revision()
+
+  Scenario: TPA reject claimant counter offer and makes new offer(Third offer) # src/test/resources/features/prouser/journey25.feature:68
+    Given Login as TPA                                                         # TPAStepDefs.login_As_TPA()
+    When the TPA send updated offer                                            # TPAStepDefs.tpa_send_updated_offer()
+    Then offer is sent to claimant                                             # CompensatorStepDefs.first_offer_claimant()
+
+  Scenario Outline: Prouser rejects the third offer to Compensator # src/test/resources/features/prouser/journey25.feature:75
+    Given '<claimant>' receives new offer
+    When '<claimant>' reject the offer
+    Then counter offer is sent for revision
+
+    Examples: 
+
+  @prouser
+  Scenario Outline: Prouser rejects the third offer to Compensator # src/test/resources/features/prouser/journey25.feature:81
+    Given 'prouser' receives new offer                             # ClaimantActionsStepDefs.receives_new_offer(String)
+    When 'prouser' reject the offer                                # ClaimantActionsStepDefs.reject_first_offer(String)
+    Then counter offer is sent for revision                        # ClaimantActionsStepDefs.counter_offer_sent_for_revision()
+
+  Scenario Outline: TPA decides to withdraw the offer # src/test/resources/features/prouser/journey25.feature:83
+    Given TPA has made first offer to claimant
+    When TPA withdraws the offer at claim '<status>'
+    Then TPA gets an option to replace the offer
+
+    Examples: 
+
+  @prouser
+  Scenario Outline: TPA decides to withdraw the offer              # src/test/resources/features/prouser/journey25.feature:89
+    Given TPA has made first offer to claimant                     # TPAStepDefs.tpa_has_made_first_offer_to_claimant()
+    When TPA withdraws the offer at claim 'Pending-RespondCounter' # TPAStepDefs.tpa_withdraws_the_offer_and_rejects_the_offer(String)
+    Then TPA gets an option to replace the offer                   # TPAStepDefs.stpa_gets_an_option_to_replace_the_offer()
+
+  Scenario: TPA rejects final offer    # src/test/resources/features/prouser/journey25.feature:92
+    Given Login as TPA                 # TPAStepDefs.login_As_TPA()
+    When final counter offer is reject # CompensatorStepDefs.reject_final_counter_offer()
+    Then offer is sent to claimant     # CompensatorStepDefs.first_offer_claimant()
+
+  Scenario Outline: Claimant goes to court to value claim # src/test/resources/features/prouser/journey25.feature:97
+    Given '<claimant>' decided to go to court
+    When '<claimant>' goes to court for final offer
+    Then Claimant selection to go to court is confirmed
+
+    Examples: 
+
+  @prouser
+  Scenario Outline: Claimant goes to court to value claim # src/test/resources/features/prouser/journey25.feature:103
+    Given 'prouser' decided to go to court                # ClaimantActionsStepDefs.claimant_go_to_court(String)
+    When 'prouser' goes to court for final offer          # ClaimantActionsStepDefs.claimant_goes_to_coutr_for_final_offer(String)
+    Then Claimant selection to go to court is confirmed   # ClaimantActionsStepDefs.go_to_court_confirmed()
+
+  Scenario Outline: Claimant answers NVC             # src/test/resources/features/prouser/journey25.feature:105
+    Given '<claimant>' decided to go to court
+    When '<claimant>' answers NVC questions
+    Then Acknowledgement will be sent to compensator
+
+    Examples: 
+
+  @prouser
+  Scenario Outline: Claimant answers NVC             # src/test/resources/features/prouser/journey25.feature:111
+    Given 'prouser' decided to go to court           # ClaimantActionsStepDefs.claimant_go_to_court(String)
+    When 'prouser' answers NVC questions             # ClaimantActionsStepDefs.claimant_answers_nvc_questions(String)
+    Then Acknowledgement will be sent to compensator # ClaimantActionsStepDefs.ack_sent_to_compensator()
+
+  Scenario: Compensator removes the claim from portal # src/test/resources/features/prouser/journey25.feature:114
+    Given TPA does not respond to NVC                 # TPAStepDefs.tpa_does_not_respond_nvc()
+    When TPA removes the claim from portal            # TPAStepDefs.compensator_terminates_the_claim()
+    Then the claim is removed from portal and closed  # CompensatorStepDefs.claim_removed_from_portal()
+
+  Scenario Outline: The claim is moved to 'Resolved-Removed'  # src/test/resources/features/prouser/journey25.feature:119
+    Given '<claimant>' goes to court
+    When prouser claim goes to dispute at court at '<status>'
+    Then the claim will be resolved at court
+
+    Examples: 
+
+  @prouser
+  Scenario Outline: The claim is moved to 'Resolved-Removed'          # src/test/resources/features/prouser/journey25.feature:125
+    Given 'prouser' goes to court                                     # ClaimantActionsStepDefs.claimant_goes_to_court(String)
+    When prouser claim goes to dispute at court at 'Resolved-Removed' # ProUserActionsStepDefs.prouser_claim_goes_to_dispute_at_court(String)
+    Then the claim will be resolved at court                          # ClaimantActionsStepDefs.the_claim_will_resolved_at_court()

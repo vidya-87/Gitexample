@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<testsuite failures="0" name="cucumber.runtime.formatter.JUnitFormatter" skipped="0" tests="22" time="7092.328735">
+    <testcase classname="Journey 2" name="Unrep claim creation with Multi VRN" time="770.88573">
+        <system-out><![CDATA[Given unrep logins into whiplash application................................passed
+When user enter all mandatory details for claim creation as 'NO' , 'I was a passenger in a Car/Lorry/Van' and 'BOTH' with 'YES','Inside UK'.passed
+Then claim reference number for unrep claim is created......................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 2" name="CSR allocates claim to  compensator" time="476.273831">
+        <system-out><![CDATA[Given Claim received by csr and eligible for assigning to compensator.......passed
+When CSR assigns compensator................................................passed
+Then Claim is sent to respective compensator................................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 2" name="Compensator  Accept Claim and denies Liability" time="206.505317">
+        <system-out><![CDATA[Given Claim  is sent to the compensator.....................................passed
+When compensator denies full liability......................................passed
+Then the claims acceptance and liability is now sent to the claimant........passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 2" name="Claimant Challenge Decision and goes to court" time="143.763477">
+        <system-out><![CDATA[Given Claimant claim liability has been rejected............................passed
+When claimant challenges and goes to court..................................passed
+Then the claimant goes to court.............................................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 2" name="Compensator review and agrees to claimant court document" time="149.492228">
+        <system-out><![CDATA[Given claimant selects court documents compensator..........................passed
+When Compensator agrees to court documents when claim is in 'Pending-LiabilityListReview'.passed
+Then the claim can be Resolved..............................................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 2" name="unrep Claimant checks the documents selected by compensator and submit the claim for court" time="168.619817">
+        <system-out><![CDATA[Given 'unrep' checks the documents uploaded by Compensator..................passed
+When claimant submits the court documents for liability.....................passed
+Then Case is closed with Go to court at offer stage.........................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 2" name="Compensator reopens claim and accepts full claim liability" time="166.863759">
+        <system-out><![CDATA[Given claimant uploads court documents......................................passed
+When compensator reopens liability disputed claim...........................passed
+Then compensator accepts full liability.....................................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 2" name="Claimant Request first Interim Payment" time="128.742998">
+        <system-out><![CDATA[Given claim has been accepted for 'unrep'...................................passed
+When 'unrep' requests interim payment.......................................passed
+Then interim payment request is sent to compensator.........................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 2" name="Compensator makes first interim payment" time="154.003713">
+        <system-out><![CDATA[Given claimant request interm payment to compensator........................passed
+When compensator makes interim payment......................................passed
+Then claimant receives interim payment......................................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 2" name="Claimant reviews and accepts first interim payment" time="495.096093">
+        <system-out><![CDATA[Given claim has been accepted for 'unrep'...................................passed
+When 'unrep' reviews and accept interim decision............................passed
+Then payment is not received by the claimant................................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 2" name="Claimant decides to go to court for interim over non-payment" time="92.946456">
+        <system-out><![CDATA[Given 'unrep' interim non-payment SLA is breached...........................passed
+When Go to court for non-payment option is enabled for 'unrep'..............passed
+Then claimant decides to go to court over interim non-payment...............passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 2" name="Claimant select court docs for interim non-payment" time="126.909226">
+        <system-out><![CDATA[Given 'unrep' goes to court over interim....................................passed
+When 'unrep' selects interim docs for court with Court proceeding No........passed
+Then court document are sent to compensator.................................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 2" name="Compensator reviews court document for Interim non-payment" time="133.29138">
+        <system-out><![CDATA[Given claimant goes to court................................................passed
+When Compensator reviews court document for interim.........................passed
+Then court docs sent for review to claimant.................................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 2" name="Unrep acknowledges documents selected by compensator" time="438.936079">
+        <system-out><![CDATA[Given compensator confirmed documents selected by claimant..................passed
+When claimant acknowledges selected documents with proceeding No............passed
+Then Interim case is resolved at court......................................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 2" name="Unrep Provides Medical Preferences" time="370.184435">
+        <system-out><![CDATA[Given the unrep claim moves to partial liability............................passed
+When unrep chooses DME after reopening claim................................passed
+Then medical preferences are sent to Independent Expert.....................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 2" name="DME uploads report-No prognosis" time="391.736549">
+        <system-out><![CDATA[Given claimant selects DME..................................................passed
+When claimant visits DME and completes checkup..............................passed
+Then DME uploads report no prognosis........................................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 2" name="Claimant selects option 'No' for the question &quot;Do you believe the facts in the medical report are complete and correct?&quot; and request for further medical" time="1261.287176">
+        <system-out><![CDATA[Given medical report is sent to claimant for review.........................passed
+And Claimant Adds fee from losses tile......................................passed
+When Claimant requests for second report....................................passed
+Then Claimant need to visit DME for medical examination again...............passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 2" name="DME  uploads medical Report with waitout period before prognosis" time="451.990989">
+        <system-out><![CDATA[Given Claimant requests further medical report after marking factually incorrect.passed
+When DME upload further report..............................................passed
+Then Report is sent to claimant.............................................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 2" name="Claimants proceeds to offer" time="507.240004">
+        <system-out><![CDATA[Given Claimant waitout Prognosis period is completed........................passed
+When unrep claimant proceeds with offer.....................................passed
+Then claim will be sent to compensator for review...........................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 2" name="Compensator makes First Offer with fee proposal" time="262.788875">
+        <system-out><![CDATA[Given Claim  is sent to the compensator.....................................passed
+When the compensator makes first offer with fee proposal....................passed
+Then offer is sent to claimant..............................................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 2" name="Unrep Claimant accepts offer" time="98.87411">
+        <system-out><![CDATA[Given Claimant received offer details.......................................passed
+When Claimant accepts offer.................................................passed
+Then Acknowledgement for offer acceptance will be sent to compensator.......passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 2" name="Compensator acknowledges offer" time="95.896493">
+        <system-out><![CDATA[Given Claim  is sent to the compensator.....................................passed
+When Compensator acknowledges claimants offer with claim 'Pending-Acknowledgement'.passed
+Then the claim can be Resolved..............................................passed
+]]></system-out>
+    </testcase>
+</testsuite>

@@ -1,0 +1,179 @@
+@unrep
+Feature: Journey 2
+
+  Scenario Outline: Unrep claim creation with Multi VRN                                                                                                 # src/test/resources/features/unrep/journey2.feature:5
+    Given unrep logins into whiplash application
+    When user enter all mandatory details for claim creation as '<owner>' , '<involvement_type_v>' and '<ct_preference>' with '<multivrn>','<location>'
+    Then claim reference number for unrep claim is created
+
+    Examples: 
+
+  @unrep
+  Scenario Outline: Unrep claim creation with Multi VRN                                                                                         # src/test/resources/features/unrep/journey2.feature:11
+    Given unrep logins into whiplash application                                                                                                # ClaimantActionsStepDefs.user_logins_into_whiplash_applicataion_using()
+    When user enter all mandatory details for claim creation as 'NO' , 'I was a passenger in a Car/Lorry/Van' and 'BOTH' with 'YES','Inside UK' # ClaimantActionsStepDefs.user_Enter_All_Mandatory_Details_For_Claim_Creation(String,String,String,String,String)
+    Then claim reference number for unrep claim is created                                                                                      # ClaimantActionsStepDefs.claim_Reference_Number_Unrep_Is_Created_Successfully()
+
+  Scenario: CSR allocates claim to  compensator                           # src/test/resources/features/unrep/journey2.feature:13
+    Given Claim received by csr and eligible for assigning to compensator # CSRStepDefs.claim_received_by_csr()
+    When CSR assigns compensator                                          # CSRStepDefs.csr_assigns_compensator()
+    Then Claim is sent to respective compensator                          # CSRStepDefs.claim_sent_to_compensator()
+
+  Scenario: Compensator  Accept Claim and denies Liability               # src/test/resources/features/unrep/journey2.feature:18
+    Given Claim  is sent to the compensator                              # CompensatorStepDefs.claim_is_sent_to_the_compensator()
+    When compensator denies full liability                               # CompensatorStepDefs.compensator_denies_full_liability()
+    Then the claims acceptance and liability is now sent to the claimant # CompensatorStepDefs.claim_full_liability_sent_claimant()
+
+  Scenario: Claimant Challenge Decision and goes to court # src/test/resources/features/unrep/journey2.feature:23
+    Given Claimant claim liability has been rejected      # ClaimantActionsStepDefs.claim_liability_rejected()
+    When claimant challenges and goes to court            # ClaimantActionsStepDefs.claimant_challenges_go_to_court()
+    Then the claimant goes to court                       # ClaimantActionsStepDefs.the_claimant_goes_to_court()
+
+  Scenario Outline: Compensator review and agrees to claimant court document # src/test/resources/features/unrep/journey2.feature:29
+    Given claimant selects court documents compensator
+    When Compensator agrees to court documents when claim is in '<status>'
+    Then the claim can be Resolved
+
+    Examples: 
+
+  @unrep
+  Scenario Outline: Compensator review and agrees to claimant court document                  # src/test/resources/features/unrep/journey2.feature:36
+    Given claimant selects court documents compensator                                        # CompensatorStepDefs.claimant_select_court_docs()
+    When Compensator agrees to court documents when claim is in 'Pending-LiabilityListReview' # CompensatorStepDefs.compensator_agree_court_documents(String)
+    Then the claim can be Resolved                                                            # CompensatorStepDefs.claim_resolved()
+
+  Scenario Outline: unrep Claimant checks the documents selected by compensator and submit the claim for court # src/test/resources/features/unrep/journey2.feature:38
+    Given '<Claimant>' checks the documents uploaded by Compensator
+    When claimant submits the court documents for liability
+    Then Case is closed with Go to court at offer stage
+
+    Examples: 
+
+  @unrep
+  Scenario Outline: unrep Claimant checks the documents selected by compensator and submit the claim for court # src/test/resources/features/unrep/journey2.feature:44
+    Given 'unrep' checks the documents uploaded by Compensator                                                 # ClaimantActionsStepDefs.claimant_verifies_documents_from_compensator(String)
+    When claimant submits the court documents for liability                                                    # ClaimantActionsStepDefs.claimant_submits_court_documents_for_liability()
+    Then Case is closed with Go to court at offer stage                                                        # ClaimantActionsStepDefs.go_to_court_claim_closed()
+
+  Scenario: Compensator reopens claim and accepts full claim liability # src/test/resources/features/unrep/journey2.feature:46
+    Given claimant uploads court documents                             # CompensatorStepDefs.claimant_uploads_court_documents()
+    When compensator reopens liability disputed claim                  # CompensatorStepDefs.compensator_repoens_liability_disputed_claim()
+    Then compensator accepts full liability                            # CompensatorStepDefs.compensator_accepts_full_liability()
+
+  #################### Sprint 41 #########################
+  Scenario Outline: Claimant Request first Interim Payment # src/test/resources/features/unrep/journey2.feature:55
+    Given claim has been accepted for '<claimant>'
+    When '<claimant>' requests interim payment
+    Then interim payment request is sent to compensator
+
+    Examples: 
+
+  @unrep
+  Scenario Outline: Claimant Request first Interim Payment # src/test/resources/features/unrep/journey2.feature:61
+    Given claim has been accepted for 'unrep'              # ClaimantActionsStepDefs.claim_has_been_accepted(String)
+    When 'unrep' requests interim payment                  # ClaimantActionsStepDefs.claimant_first_interim_payment(String)
+    Then interim payment request is sent to compensator    # ClaimantActionsStepDefs.interim_payment_request_compensator()
+
+  Scenario: Compensator makes first interim payment      # src/test/resources/features/unrep/journey2.feature:63
+    Given claimant request interm payment to compensator # CompensatorStepDefs.request_interim_payment_compensator()
+    When compensator makes interim payment               # CompensatorStepDefs.compensator_makes_interim_payment()
+    Then claimant receives interim payment               # CompensatorStepDefs.claimant_receives_interim_payment()
+
+  Scenario Outline: Claimant reviews and accepts first interim payment # src/test/resources/features/unrep/journey2.feature:68
+    Given claim has been accepted for '<claimant>'
+    When '<claimant>' reviews and accept interim decision
+    Then payment is not received by the claimant
+
+    Examples: 
+
+  @unrep
+  Scenario Outline: Claimant reviews and accepts first interim payment # src/test/resources/features/unrep/journey2.feature:74
+    Given claim has been accepted for 'unrep'                          # ClaimantActionsStepDefs.claim_has_been_accepted(String)
+    When 'unrep' reviews and accept interim decision                   # ClaimantActionsStepDefs.claimant_reviews_accept_interim_decision(String)
+    Then payment is not received by the claimant                       # ClaimantActionsStepDefs.payment_not_received_the_claimant()
+
+  Scenario Outline: Claimant decides to go to court for interim over non-payment # src/test/resources/features/unrep/journey2.feature:77
+    Given '<claimant>' interim non-payment SLA is breached
+    When Go to court for non-payment option is enabled for '<claimant>'
+    Then claimant decides to go to court over interim non-payment
+
+    Examples: 
+
+  @unrep
+  Scenario Outline: Claimant decides to go to court for interim over non-payment # src/test/resources/features/unrep/journey2.feature:83
+    Given 'unrep' interim non-payment SLA is breached                            # ClaimantActionsStepDefs.interim_payment_sla_breached(String)
+    When Go to court for non-payment option is enabled for 'unrep'               # ClaimantActionsStepDefs.gotocourt_non_payment_option(String)
+    Then claimant decides to go to court over interim non-payment                # ClaimantActionsStepDefs.claimant_goto_court_for_non_payment()
+
+  Scenario Outline: Claimant select court docs for interim non-payment        # src/test/resources/features/unrep/journey2.feature:86
+    Given '<claimant>' goes to court over interim
+    When '<claimant>' selects interim docs for court with Court proceeding No
+    Then court document are sent to compensator
+
+    Examples: 
+
+  @unrep
+  Scenario Outline: Claimant select court docs for interim non-payment   # src/test/resources/features/unrep/journey2.feature:93
+    Given 'unrep' goes to court over interim                             # ClaimantActionsStepDefs.claimant_goes_to_court_over_interim(String)
+    When 'unrep' selects interim docs for court with Court proceeding No # ClaimantActionsStepDefs.unrep_selects_interim_docs_for_court_with_Court_proceeding_No(String)
+    Then court document are sent to compensator                          # ClaimantActionsStepDefs.court_documents_are_to_compensator()
+
+  Scenario: Compensator reviews court document for Interim non-payment # src/test/resources/features/unrep/journey2.feature:96
+    Given claimant goes to court                                       # CompensatorStepDefs.claimant_goes_to_court()
+    When Compensator reviews court document for interim                # CompensatorStepDefs.compensator_reviews_court_document_interim()
+    Then court docs sent for review to claimant                        # CompensatorStepDefs.court_sent_for_review_to_claimant()
+
+  Scenario: Unrep acknowledges documents selected by compensator     # src/test/resources/features/unrep/journey2.feature:101
+    Given compensator confirmed documents selected by claimant       # ClaimantActionsStepDefs.compensator_confirmed_documents_selected_claimant()
+    When claimant acknowledges selected documents with proceeding No # ClaimantActionsStepDefs.claimant_ack_selected_docs_with_proceeding_No()
+    Then Interim case is resolved at court                           # ClaimantActionsStepDefs.interim_case_resolved()
+
+  ###########################################################
+  Scenario: Unrep Provides Medical Preferences              # src/test/resources/features/unrep/journey2.feature:109
+    Given the unrep claim moves to partial liability        # ClaimantActionsStepDefs.claim_partial_liability()
+    When unrep chooses DME after reopening claim            # ClaimantActionsStepDefs.unrep_choose_dme_after_reopeing_claim()
+    Then medical preferences are sent to Independent Expert # ClaimantActionsStepDefs.medical_preferences_sent_experts()
+
+  Scenario: DME uploads report-No prognosis        # src/test/resources/features/unrep/journey2.feature:114
+    Given claimant selects DME                     # DMEDefs.claimant_selects_dme()
+    When claimant visits DME and completes checkup # DMEDefs.claimant_visits_dme_complete_checkup()
+    Then DME uploads report no prognosis           # DMEDefs.dme_upload_report_no_prognosis()
+
+  Scenario: Claimant selects option 'No' for the question "Do you believe the facts in the medical report are complete and correct?" and request for further medical # src/test/resources/features/unrep/journey2.feature:119
+    Given medical report is sent to claimant for review                                                                                                              # ClaimantActionsStepDefs.medical_report_sent_to_claimant_review()
+    And Claimant Adds fee from losses tile                                                                                                                           # ClaimantActionsStepDefs.unrep_add_fee_loss_tile()
+    When Claimant requests for second report                                                                                                                         # ClaimantActionsStepDefs.unrep_requests_second_report()
+    Then Claimant need to visit DME for medical examination again                                                                                                    # ClaimantActionsStepDefs.claimant_need_to_visit_dme()
+
+  Scenario: DME  uploads medical Report with waitout period before prognosis         # src/test/resources/features/unrep/journey2.feature:125
+    Given Claimant requests further medical report after marking factually incorrect # DMEDefs.claimant_requests_further_medical_report_factually_incorrect()
+    When DME upload further report                                                   # DMEDefs.dme_uploads_further_report()
+    Then Report is sent to claimant                                                  # DMEDefs.report_is_sent_to_claimant()
+
+  Scenario: Claimants proceeds to offer                  # src/test/resources/features/unrep/journey2.feature:130
+    Given Claimant waitout Prognosis period is completed # ClaimantActionsStepDefs.claimant_waitout_prognosis_period_is_completed()
+    When unrep claimant proceeds with offer              # ClaimantActionsStepDefs.unrep_proceed_with_offer()
+    Then claim will be sent to compensator for review    # ClaimantActionsStepDefs.claim_sent_to_compensator_for_review()
+
+  Scenario: Compensator makes First Offer with fee proposal  # src/test/resources/features/unrep/journey2.feature:135
+    Given Claim  is sent to the compensator                  # CompensatorStepDefs.claim_is_sent_to_the_compensator()
+    When the compensator makes first offer with fee proposal # CompensatorStepDefs.compensator_makes_first_offer_with_fee_proposal_mibprouser()
+    Then offer is sent to claimant                           # CompensatorStepDefs.first_offer_claimant()
+
+  Scenario: Unrep Claimant accepts offer                                  # src/test/resources/features/unrep/journey2.feature:140
+    Given Claimant received offer details                                 # ClaimantActionsStepDefs.claimant_received_offer_details()
+    When Claimant accepts offer                                           # ClaimantActionsStepDefs.claimant_accepts_offer()
+    Then Acknowledgement for offer acceptance will be sent to compensator # ClaimantActionsStepDefs.acknowledgement_for_offer_acceptance_will_be_sent_to_compensator()
+
+  Scenario Outline: Compensator acknowledges offer                      # src/test/resources/features/unrep/journey2.feature:145
+    Given Claim  is sent to the compensator
+    When Compensator acknowledges claimants offer with claim '<status>'
+    Then the claim can be Resolved
+
+    Examples: 
+
+  @unrep
+  Scenario Outline: Compensator acknowledges offer                                     # src/test/resources/features/unrep/journey2.feature:151
+    Given Claim  is sent to the compensator                                            # CompensatorStepDefs.claim_is_sent_to_the_compensator()
+    When Compensator acknowledges claimants offer with claim 'Pending-Acknowledgement' # CompensatorStepDefs.compensator_acknowledges_claimants_offer(String)
+    Then the claim can be Resolved                                                     # CompensatorStepDefs.claim_resolved()

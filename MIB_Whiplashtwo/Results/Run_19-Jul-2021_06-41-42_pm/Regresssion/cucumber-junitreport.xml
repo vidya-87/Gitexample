@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<testsuite failures="0" name="cucumber.runtime.formatter.JUnitFormatter" skipped="0" tests="10" time="2472.891488">
+    <testcase classname="Journey 20" name="Prouser Submit a Claim as passenger in bus" time="546.803209">
+        <system-out><![CDATA[Given prouser logins into whiplash application..............................passed
+When prouser enter all mandatory details for claim creation as 'A passenger on a bus' and 'NO' and 'NO'.passed
+Then claim is created for prouser...........................................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 20" name="Compensator receives claim and claim liability sent to TPA" time="90.310468">
+        <system-out><![CDATA[Given Claim  is sent to the compensator.....................................passed
+When compensator receives claim and send to TPA.............................passed
+Then claims acceptance and liability decision is now sent to TPA............passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 20" name="TPA disputes causation and admits part liability" time="167.260964">
+        <system-out><![CDATA[Given Login as TPA..........................................................passed
+When TPA accepts claim and makes part liability with dispute................passed
+Then claims acceptance and liability information is passed to claimant......passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 20" name="Prouser uploads medical report" time="319.647886">
+        <system-out><![CDATA[Given upload medical report is enabled for 'prouser'........................passed
+And 'prouser' adds fee......................................................passed
+When claimant uploads medical report at 'Pending-MedPartCausation'..........passed
+Then medical report is uploaded and offer request is sent to compensator....passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 20" name="TPA makes First Offer with fee proposal" time="241.62815">
+        <system-out><![CDATA[Given claimant requests offer to TPA........................................passed
+When the TPA makes first offer with fee proposal............................passed
+Then claim will be sent for claimant acknowledgement........................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 20" name="prouser accepts offer and rejects fee proposal" time="517.41145">
+        <system-out><![CDATA[Given prouser review fee proposal...........................................passed
+When prouser accepts offer and makes counter fees proposal..................passed
+Then pro counter offer sent to compensator..................................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 20" name="TPA doesnot respond to the counter fee proposal and claimant goes to court" time="157.173859">
+        <system-out><![CDATA[Given TPA doesnot respond to the claimant counter offer request.............passed
+When prouser claimant goes to court over fee proposal.......................passed
+Then claim will be sent to compensator to review nvc answers................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 20" name="TPA acknowledges documents selected for court" time="117.112279">
+        <system-out><![CDATA[Given claimant selects court documents TPA..................................passed
+When TPA agrees to court documents when claim is in 'Pending-FeesListReview'.passed
+Then claim is sent to claimant..............................................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 20" name="prouser Claimant acknowledges Compensators doc selection and case is resolved" time="232.447448">
+        <system-out><![CDATA[Given 'prouser' checks the documents uploaded by Compensator................passed
+When 'prouser' submit the claim for court with claim 'Pending-FeesListAccept' for fee dispute.passed
+Then case is closed at court stage..........................................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 20" name="The claim is moved to 'Resolved-CourtFees'" time="83.095775">
+        <system-out><![CDATA[Given 'prouser' goes to court...............................................passed
+When prouser claim goes to dispute at court at 'Resolved-CourtFees'.........passed
+Then the claim will be resolved at court....................................passed
+]]></system-out>
+    </testcase>
+</testsuite>

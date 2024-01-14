@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<testsuite failures="0" name="cucumber.runtime.formatter.JUnitFormatter" skipped="0" tests="18" time="8197.972183">
+    <testcase classname="Journey 36" name="Prouser Submit a Claim as a owner" time="562.399366">
+        <system-out><![CDATA[Given prouser logins into whiplash application..............................passed
+When prouser enter all mandatory details for claim creation as 'The driver' and 'YES' and 'NO'.passed
+Then claim is created for prouser...........................................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 36" name="Compensator receives claim and claim liability sent to TPA" time="91.238724">
+        <system-out><![CDATA[Given Claim  is sent to the compensator.....................................passed
+When compensator receives claim and send to TPA.............................passed
+Then claims acceptance and liability decision is now sent to TPA............passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 36" name="TPA disputes causation and admits part liability" time="153.203729">
+        <system-out><![CDATA[Given Login as TPA..........................................................passed
+When TPA accepts full liability.............................................passed
+Then claims acceptance and liability information is passed to claimant......passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 36" name="Claimant add losses and documents" time="155.268597">
+        <system-out><![CDATA[Given claim liability is accepted...........................................passed
+When claimant update the losses from Loss Tile and upload documents.........passed
+Then claim will proceed to upload medical reports...........................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 36" name="Prouser  uploads medical Report with waitout prognosis" time="206.019176">
+        <system-out><![CDATA[Given 'prouser' receives claim..............................................passed
+When prouser uploads the medical report with waitout prognosis 'Pending-Medical' and decides to waitout.passed
+Then report is uploaded and sent to compensator.............................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 36" name="Prouser indicates completion of wait out period and upload new report" time="413.929514">
+        <system-out><![CDATA[Given 'prouser' receives claim..............................................passed
+When claimant indicates completion of waitout period and upload new report..passed
+Then report is uploaded and sent to compensator.............................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 36" name="TPA First Offer to Prouser" time="243.516207">
+        <system-out><![CDATA[Given Login as TPA..........................................................passed
+When the TPA makes first offer..............................................passed
+Then offer is sent to claimant..............................................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 36" name="Prouser rejects the first offer to Compensator" time="227.534903">
+        <system-out><![CDATA[Given 'prouser' receives the offer..........................................passed
+When 'prouser' reject the offer.............................................passed
+Then counter offer is sent for revision.....................................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 36" name="TPA reject claimant counter offer and makes new offer(Second offer)" time="140.304459">
+        <system-out><![CDATA[Given Login as TPA..........................................................passed
+When the TPA send updated offer.............................................passed
+Then offer is sent to claimant..............................................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 36" name="Prouser rejects the Second offer to Compensator" time="1227.071837">
+        <system-out><![CDATA[Given 'prouser' receives the offer..........................................passed
+When 'prouser' reject the offer.............................................passed
+Then counter offer is sent for revision.....................................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 36" name="Compensator reject claimant counter offer and makes new offer(third offer)" time="138.058757">
+        <system-out><![CDATA[Given Login as TPA..........................................................passed
+When the TPA send updated offer.............................................passed
+Then offer is sent to claimant..............................................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 36" name="Prouser rejects offer and goes to court" time="151.814372">
+        <system-out><![CDATA[Given 'prouser' receives new offer..........................................passed
+When 'prouser' decides to go to court after rejecting offer.................passed
+Then counter offer is sent for revision.....................................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 36" name="Prouser goes to court and answer NVC" time="357.113966">
+        <system-out><![CDATA[Given 'prouser' decided to go to court......................................passed
+When 'prouser' answers NVC questions........................................passed
+Then claim will be sent to compensator to review nvc answers................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 36" name="TPA agrees the nvc selection" time="98.425954">
+        <system-out><![CDATA[Given TPA receives claim to review NVC answers..............................passed
+When TPA responds to NVC answers............................................passed
+Then claim should be sent to claimant to select documents for court.........passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 36" name="prouser Claimant selects documents for court" time="161.815606">
+        <system-out><![CDATA[Given Compensator responds NVC answers to 'prouser'.........................passed
+When 'prouser' selects documents for court after NVC........................passed
+Then documents should be reviewed by Compensator............................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 36" name="TPA acknowledges documents selected for court" time="3571.541423">
+        <system-out><![CDATA[Given claimant selects court documents TPA..................................passed
+When TPA agrees to court documents when claim is in 'Pending-OfferListReview'.passed
+Then claim is sent to claimant..............................................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 36" name="prouser Claimant acknowledges TPA doc selection and case is resolved" time="211.398002">
+        <system-out><![CDATA[Given 'prouser' checks the documents uploaded by Compensator................passed
+When prouser submit the claim for NVC court and select witness at 'Pending-OfferListAccept'.passed
+Then case is closed at court stage..........................................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 36" name="The claim is moved to 'Resolved-CourtOffer'" time="87.317591">
+        <system-out><![CDATA[Given 'prouser' goes to court...............................................passed
+When prouser claim goes to dispute at court at 'Resolved-CourtOffer'........passed
+Then the claim will be resolved at court....................................passed
+]]></system-out>
+    </testcase>
+</testsuite>

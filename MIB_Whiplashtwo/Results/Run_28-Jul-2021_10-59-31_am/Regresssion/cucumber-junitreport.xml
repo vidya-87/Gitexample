@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<testsuite failures="0" name="cucumber.runtime.formatter.JUnitFormatter" skipped="0" tests="16" time="3419.552756">
+    <testcase classname="Journey 39" name="Prouser Submit a Claim as passenger in a car" time="561.816601">
+        <system-out><![CDATA[Given prouser logins into whiplash application..............................passed
+When prouser enter all mandatory details for claim creation as 'A passenger on a bus' and 'NO' and 'NO'.passed
+Then claim is created for prouser...........................................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 39" name="Compensator receives claim and claim liability sent to TPA" time="97.472517">
+        <system-out><![CDATA[Given Claim  is sent to the compensator.....................................passed
+When compensator receives claim and send to TPA.............................passed
+Then claims acceptance and liability decision is now sent to TPA............passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 39" name="TPA disputes causation and admits full liability" time="179.33356">
+        <system-out><![CDATA[Given Login as TPA..........................................................passed
+When TPA accepts full liability.............................................passed
+Then claims acceptance and liability information is passed to claimant......passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 39" name="Claimant Request first Interim Payment" time="155.575725">
+        <system-out><![CDATA[Given claim has been accepted for 'prouser'.................................passed
+When 'prouser' requests interim payment.....................................passed
+Then interim payment request is sent to compensator.........................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 39" name="Compensator makes first interim payment" time="121.786535">
+        <system-out><![CDATA[Given Login as TPA..........................................................passed
+When compensator makes interim payment......................................passed
+Then claimant receives interim payment......................................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 39" name="Claimant reviews and accepts first interim payment" time="467.192608">
+        <system-out><![CDATA[Given claim has been accepted for 'prouser'.................................passed
+When 'prouser' reviews and accept interim decision..........................passed
+Then payment is not received by the claimant................................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 39" name="Claimant decides to go to court for interim over non-payment" time="103.316399">
+        <system-out><![CDATA[Given 'prouser' interim non-payment SLA is breached.........................passed
+When Go to court for non-payment option is enabled for 'prouser'............passed
+Then claimant decides to go to court over interim non-payment...............passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 39" name="Claimant select court docs for interim non-payment" time="149.658997">
+        <system-out><![CDATA[Given 'prouser' goes to court over interim..................................passed
+When 'prouser' selects document for court for interim non-payment...........passed
+Then court document are sent to compensator.................................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 39" name="Compensator reviews court document for Interim non-payment" time="118.351058">
+        <system-out><![CDATA[Given Login as TPA..........................................................passed
+When Compensator reviews court document for interim.........................passed
+Then court docs sent for review to claimant.................................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 39" name="prouser Claimant acknowledges TPA doc selection and case is resolved" time="161.456095">
+        <system-out><![CDATA[Given prouser receives claim for acknowledgement............................passed
+When prouser claimant acknowledge for Interim...............................passed
+Then case is closed at court stage..........................................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 39" name="Prouser uploads medical report" time="274.629472">
+        <system-out><![CDATA[Given upload medical report is enabled for 'prouser'........................passed
+When "prouser" uploads medical report with Uplift request...................passed
+Then medical report is uploaded and offer request is sent to compensator....passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 39" name="TPA First Offer to Prouser" time="257.343222">
+        <system-out><![CDATA[Given Login as TPA..........................................................passed
+When the TPA makes first offer with NON whiplash injury with uplift.........passed
+Then offer is sent to claimant..............................................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 39" name="Prouser rejects offer and goes to court" time="172.560121">
+        <system-out><![CDATA[Given 'prouser' receives new offer..........................................passed
+When "prouser" decided to go to court after rejecting first offer...........passed
+Then counter offer is sent for revision.....................................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 39" name="Prouser selected Court proceeding started and selected documents for court" time="240.930424">
+        <system-out><![CDATA[Given "prouser" started court proceeding....................................passed
+When "prouser" selected Court proceeding started as Yes.....................passed
+And "prouser" selected documents for court..................................passed
+Then documents sent to TPA..................................................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 39" name="TPA acknowledges documents selected for court" time="112.409443">
+        <system-out><![CDATA[Given claimant selects court documents TPA..................................passed
+When TPA agrees to court documents when claim is in 'Pending-OfferListReview'.passed
+Then claim is sent to claimant..............................................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 39" name="Claimant checks the documents selected by TPA and proceeds the claim for court" time="245.719979">
+        <system-out><![CDATA[Given 'prouser' checks the documents uploaded by Compensator................passed
+When "prouser" entered details in court screen..............................passed
+Then Case is closed with Go to court at offer stage.........................passed
+]]></system-out>
+    </testcase>
+</testsuite>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<testsuite failures="0" name="cucumber.runtime.formatter.JUnitFormatter" skipped="0" tests="17" time="4555.870675">
+    <testcase classname="Journey 10" name="Prouser Submit a Claim as passenger in a car" time="540.078534">
+        <system-out><![CDATA[Given prouser logins into whiplash application..............................passed
+When prouser enter all mandatory details for claim creation as 'A passenger in a car/van/lorry' and 'NO' and 'YES'.passed
+Then claim is created for prouser...........................................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 10" name="CSR allocates claim to  compensator" time="431.07773">
+        <system-out><![CDATA[Given Claim received by csr and eligible for assigning to compensator.......passed
+When CSR assigns compensator................................................passed
+Then Claim is sent to respective compensator................................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 10" name="Compensator receives claim and claim liability sent to TPA" time="97.2402">
+        <system-out><![CDATA[Given Claim  is sent to the compensator.....................................passed
+When compensator receives claim and send to TPA.............................passed
+Then claims acceptance and liability decision is now sent to TPA............passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 10" name="TPA dispute denies liability" time="157.7273">
+        <system-out><![CDATA[Given the claim  has been sent to the TPA workbasket........................passed
+When TPA dispute claim liability............................................passed
+Then claims acceptance and liability information is passed to claimant......passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 10" name="Prouser challenge decision and go to court and submit documents" time="149.906156">
+        <system-out><![CDATA[Given Prouser claim liability has been rejected.............................passed
+When prouser wants to challenge decision and decided to go to court.........passed
+Then the claimant goes to court.............................................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 10" name="TPA disagree for document selection" time="108.101837">
+        <system-out><![CDATA[Given Uploaded documents for court cofirmed by Claimant.....................passed
+When TPA disagrees to court documents uploaded by Claimant at 'Pending-LiabilityListReview'.passed
+Then claimant need to review the documents uploaded by TPA..................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 10" name="prouser Claimant acknowledges TPA doc selection and case is resolved" time="182.497212">
+        <system-out><![CDATA[Given prouser receives claim for acknowledgement............................passed
+When prouser claimant acknowledge for liability challenge...................passed
+Then case is closed at court stage..........................................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 10" name="TPA reopens claim and make full liability to claimant" time="133.165014">
+        <system-out><![CDATA[Given Claim is resolved at court............................................passed
+When TPA reopens liability disputed claim...................................passed
+Then TPA accepts full liability after reopening the claim...................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 10" name="Prouser  uploads medical Report with waitout prognosis and decides waitout and release report to TPA" time="268.403853">
+        <system-out><![CDATA[Given 'prouser' receives claim..............................................passed
+And 'prouser' adds fee......................................................passed
+When prouser uploads the medical report with waitout prognosis 'Pending-MedicalAfterCourt' and decides to waitout.passed
+Then report is uploaded and sent to compensator.............................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 10" name="Prouser decides to proceed with offer" time="170.30312">
+        <system-out><![CDATA[Given claimant is in prognosis period.......................................passed
+When claimant decides to proceed with offer during prognosis period.........passed
+Then claim will be sent to TPA for offer....................................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 10" name="TPA First Offer to Prouser" time="241.794884">
+        <system-out><![CDATA[Given claimant requests offer to TPA........................................passed
+When the TPA makes first offer with fee proposal............................passed
+Then claim will be sent for claimant acknowledgement........................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 10" name="Claimant Accepts First Offer to TPA" time="126.954003">
+        <system-out><![CDATA[Given 'prouser' receives the offer..........................................passed
+When Prousuer accepts offer.................................................passed
+Then Acknowledgement for offer acceptance will be sent to compensator.......passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 10" name="TPA acknowledge claimant offer" time="444.965859">
+        <system-out><![CDATA[Given claimant accepts the offer............................................passed
+When TPA acknowledges claimants offer with claim 'Pending-Acknowledgement'..passed
+Then claim SLA is breached..................................................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 10" name="Claimant decides to go to court (OCS3)" time="1125.681694">
+        <system-out><![CDATA[Given SLA is breached for non-payment.......................................passed
+When prouser decides to go to court for claim settlement pending............passed
+Then documents will be sent to TPA..........................................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 10" name="TPA acknowledges documents selected for court" time="123.208223">
+        <system-out><![CDATA[Given claimant selects court documents TPA..................................passed
+When TPA agrees to court documents when claim is in 'Pending-OfferListReview'.passed
+Then claim is sent to claimant..............................................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 10" name="Claimant checks the documents selected by Compensator and proceeds the claim for court" time="168.133872">
+        <system-out><![CDATA[Given 'prouser' checks the documents uploaded by Compensator................passed
+When 'prouser' submit the claim for court with claim 'Pending-OfferListAccept'.passed
+Then Case is closed with Go to court at offer stage.........................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 10" name="The claim is moved to 'Resolved-NonPayment'" time="86.631184">
+        <system-out><![CDATA[Given 'prouser' goes to court...............................................passed
+When prouser claim goes to dispute at court at 'Resolved-NonPayment'........passed
+Then the claim will be resolved at court....................................passed
+]]></system-out>
+    </testcase>
+</testsuite>

@@ -1,0 +1,99 @@
+@unrep
+Feature: Journey 17
+
+  Scenario Outline: Unrep claim creation as car owner                                                                                                   # src/test/resources/features/unrep/journey17.feature:4
+    Given unrep logins into whiplash application
+    When user enter all mandatory details for claim creation as '<owner>' , '<involvement_type_v>' and '<ct_preference>' with '<multivrn>','<location>'
+    Then claim reference number for unrep claim is created
+
+    Examples: 
+
+  @unrep
+  Scenario Outline: Unrep claim creation as car owner                                                                      # src/test/resources/features/unrep/journey17.feature:10
+    Given unrep logins into whiplash application                                                                           # ClaimantActionsStepDefs.user_logins_into_whiplash_applicataion_using()
+    When user enter all mandatory details for claim creation as 'NO' , 'I was the driver' and 'BOTH' with 'NO','Inside UK' # ClaimantActionsStepDefs.user_Enter_All_Mandatory_Details_For_Claim_Creation(String,String,String,String,String)
+    Then claim reference number for unrep claim is created                                                                 # ClaimantActionsStepDefs.claim_Reference_Number_Unrep_Is_Created_Successfully()
+
+  Scenario: Compensator  Accept Claim and full Liability                    # src/test/resources/features/unrep/journey17.feature:12
+    Given Claim  is sent to the compensator                                 # CompensatorStepDefs.claim_is_sent_to_the_compensator()
+    When compensator accepts claim and makes full liability without dispute # CompensatorStepDefs.compensator_liability_without_dispute()
+    Then the claims acceptance and liability is now sent to the claimant    # CompensatorStepDefs.claim_full_liability_sent_claimant()
+
+  Scenario: Unrep Provides Medical Preferences              # src/test/resources/features/unrep/journey17.feature:17
+    Given the unrep claim moves to full liability           # ClaimantActionsStepDefs.claim_full_liability()
+    When unrep selects medical preferences for an DME       # ClaimantActionsStepDefs.unrep_medical_preference_dme()
+    Then medical preferences are sent to Independent Expert # ClaimantActionsStepDefs.medical_preferences_sent_experts()
+
+  Scenario: DME uploads report-No prognosis        # src/test/resources/features/unrep/journey17.feature:22
+    Given claimant selects DME                     # DMEDefs.claimant_selects_dme()
+    When claimant visits DME and completes checkup # DMEDefs.claimant_visits_dme_complete_checkup()
+    Then DME uploads report no prognosis           # DMEDefs.dme_upload_report_no_prognosis()
+
+  Scenario: Unrep reviews medical report and proceeds with offer     # src/test/resources/features/unrep/journey17.feature:27
+    Given DME uploads medical report                                 # ClaimantActionsStepDefs.dme_uploads_medical_report()
+    When claimant reviews medical report and acknowledges the report # ClaimantActionsStepDefs.claimant_review_medical_report_acknowledge()
+    Then claim is sent to compensator                                # ClaimantActionsStepDefs.cliam_sent_to_compensator()
+
+  Scenario: Compensator makes First Offer   # src/test/resources/features/unrep/journey17.feature:32
+    Given Claim  is sent to the compensator # CompensatorStepDefs.claim_is_sent_to_the_compensator()
+    When the compensator makes first offer  # CompensatorStepDefs.the_compensator_makes_first_offer()
+    Then offer is sent to claimant          # CompensatorStepDefs.first_offer_claimant()
+
+  Scenario: Unrep Claimant accepts offer and makes counter fees proposal. # src/test/resources/features/unrep/journey17.feature:37
+    Given Claimant received offer details                                 # ClaimantActionsStepDefs.claimant_received_offer_details()
+    When Claimant accepts offer and makes fees request                    # ClaimantActionsStepDefs.Claimant_accepts_offer_and_makes_fee_request()
+    Then Acknowledgement for offer acceptance will be sent to compensator # ClaimantActionsStepDefs.acknowledgement_for_offer_acceptance_will_be_sent_to_compensator()
+
+  Scenario: Compensator makes fee proposal # src/test/resources/features/unrep/journey17.feature:43
+    Given claimant has requested for fee   # CompensatorStepDefs.claimant_has_requested_for_fee()
+    When compensator make fee proposal     # CompensatorStepDefs.compensator_make_fee_proposal()
+    Then fee proposal is sent to claimant  # CompensatorStepDefs.fee_proposal_is_sent_to_claimant()
+
+  Scenario: Claimant makes counter fees proposal              # src/test/resources/features/unrep/journey17.feature:48
+    Given Claimant receives the fee proposal from compensator # ClaimantActionsStepDefs.claimant_receives_fee_proposal_from_compensator()
+    When Claimant rejects the fee proposal                    # ClaimantActionsStepDefs.claimant_rejects_the_fee_propsal()
+    Then counter fee proposal is sent back to the compensator # ClaimantActionsStepDefs.counter_fee_proposa_is_sent_back_to_compensator()
+
+  Scenario: Compensator does not respond to counter fees proposal and claimant goes to court # src/test/resources/features/unrep/journey17.feature:53
+    Given Compensator didn’t respond to claimant updated offer                               # ClaimantActionsStepDefs.compensator_didnt_respond_to_offer()
+    When claimant decides to challenge fee decision and decided to go to court               # ClaimantActionsStepDefs.claimant_decides_to_challenge_fee_decision()
+    Then the claimant goes to court                                                          # ClaimantActionsStepDefs.the_claimant_goes_to_court()
+
+  Scenario Outline: Compensator review and agrees to claimant court document # src/test/resources/features/unrep/journey17.feature:58
+    Given claimant selects court documents compensator
+    When Compensator agrees to court documents when claim is in '<status>'
+    Then claim will be sent for claimant acknowledgement
+
+    Examples: 
+
+  @unrep
+  Scenario Outline: Compensator review and agrees to claimant court document            # src/test/resources/features/unrep/journey17.feature:64
+    Given claimant selects court documents compensator                                  # CompensatorStepDefs.claimant_select_court_docs()
+    When Compensator agrees to court documents when claim is in 'Pending-FeeListReview' # CompensatorStepDefs.compensator_agree_court_documents(String)
+    Then claim will be sent for claimant acknowledgement                                # TPAStepDefs.claim_sent_for_claimant_ack()
+
+  Scenario Outline: unrep Claimant checks the documents selected by compensator and submit the claim for court # src/test/resources/features/unrep/journey17.feature:66
+    Given '<Claimant>' checks the documents uploaded by Compensator
+    When '<Claimant>' submit the claim for court with claim '<status>' for fee dispute
+    Then Case is closed with Go to court at offer stage
+
+    Examples: 
+
+  @unrep
+  Scenario Outline: unrep Claimant checks the documents selected by compensator and submit the claim for court # src/test/resources/features/unrep/journey17.feature:72
+    Given 'unrep' checks the documents uploaded by Compensator                                                 # ClaimantActionsStepDefs.claimant_verifies_documents_from_compensator(String)
+    When 'unrep' submit the claim for court with claim 'Pending-FeeListAccept' for fee dispute                 # ClaimantActionsStepDefs.claimant_submit_claim_to_court_fee_dispute(String,String)
+    Then Case is closed with Go to court at offer stage                                                        # ClaimantActionsStepDefs.go_to_court_claim_closed()
+
+  Scenario Outline: Verify the claim is in Resolved status # src/test/resources/features/unrep/journey17.feature:73
+    Given '<claimant>' goes to court
+    When the claim goes to dispute at court at '<status>'
+    Then the claim will be resolved at court
+
+    Examples: 
+
+  @unrep
+  Scenario Outline: Verify the claim is in Resolved status          # src/test/resources/features/unrep/journey17.feature:79
+    Given 'unrep' goes to court                                     # ClaimantActionsStepDefs.claimant_goes_to_court(String)
+    When the claim goes to dispute at court at 'Resolved-CourtFees' # ClaimantActionsStepDefs.claim_goes_to_dispute_at_court(String)
+    Then the claim will be resolved at court                        # ClaimantActionsStepDefs.the_claim_will_resolved_at_court()

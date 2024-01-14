@@ -1,0 +1,48 @@
+@unrep
+Feature: Journey 18
+
+  Scenario Outline: Unrep claim creation as car owner                                                                                                   # src/test/resources/features/unrep/journey18.feature:4
+    Given unrep logins into whiplash application
+    When user enter all mandatory details for claim creation as '<owner>' , '<involvement_type_v>' and '<ct_preference>' with '<multivrn>','<location>'
+    Then claim reference number for unrep claim is created
+
+    Examples: 
+
+  @unrep
+  Scenario Outline: Unrep claim creation as car owner                                                                      # src/test/resources/features/unrep/journey18.feature:10
+    Given unrep logins into whiplash application                                                                           # ClaimantActionsStepDefs.user_logins_into_whiplash_applicataion_using()
+    When user enter all mandatory details for claim creation as 'NO' , 'I was the driver' and 'BOTH' with 'NO','Inside UK' # ClaimantActionsStepDefs.user_Enter_All_Mandatory_Details_For_Claim_Creation(String,String,String,String,String)
+    Then claim reference number for unrep claim is created                                                                 # ClaimantActionsStepDefs.claim_Reference_Number_Unrep_Is_Created_Successfully()
+
+  Scenario: Compensator  Accept Claim and full Liability                    # src/test/resources/features/unrep/journey18.feature:12
+    Given Claim  is sent to the compensator                                 # CompensatorStepDefs.claim_is_sent_to_the_compensator()
+    When compensator accepts claim and makes full liability without dispute # CompensatorStepDefs.compensator_liability_without_dispute()
+    Then the claims acceptance and liability is now sent to the claimant    # CompensatorStepDefs.claim_full_liability_sent_claimant()
+
+  Scenario: Unrep Provides Medical Preferences              # src/test/resources/features/unrep/journey18.feature:17
+    Given the unrep claim moves to full liability           # ClaimantActionsStepDefs.claim_full_liability()
+    When unrep selects medical preferences for an DME       # ClaimantActionsStepDefs.unrep_medical_preference_dme()
+    Then medical preferences are sent to Independent Expert # ClaimantActionsStepDefs.medical_preferences_sent_experts()
+
+  Scenario: DME uploads report-with Wait out prognosis more than twenty four months # src/test/resources/features/unrep/journey18.feature:22
+    Given claimant selects DME                                                      # DMEDefs.claimant_selects_dme()
+    When DME upload medical report with prognois time                               # DMEDefs.dme_upload_medical_report_with_prognosis_time()
+    Then Report is sent to claimant                                                 # DMEDefs.report_is_sent_to_claimant()
+
+  Scenario Outline: Claimant decides to withdraw claim based on threshold message indicating claim can be withdrawn if needed. # src/test/resources/features/unrep/journey18.feature:27
+    Given claimant reviews medical report when uploaded by DME
+    When the unrep claimant then decides to withdraw the claim at '<status>'
+    Then the claimant has withdrawn claim and Compensator to acknowledge this
+
+    Examples: 
+
+  @unrep
+  Scenario Outline: Claimant decides to withdraw claim based on threshold message indicating claim can be withdrawn if needed. # src/test/resources/features/unrep/journey18.feature:33
+    Given claimant reviews medical report when uploaded by DME                                                                 # ClaimantActionsStepDefs.review_medical_report_uploaded_by_dme()
+    When the unrep claimant then decides to withdraw the claim at 'Pending-CheckMedical'                                       # ClaimantActionsStepDefs.unrep_claimant_withdraw_claim(String)
+    Then the claimant has withdrawn claim and Compensator to acknowledge this                                                  # ClaimantActionsStepDefs.claimant_withdrawn_claim_compensator_acknowledge()
+
+  Scenario: Compensator acknowledges the withdrawl and claim resolved # src/test/resources/features/unrep/journey18.feature:35
+    Given Claim  is sent to the compensator                           # CompensatorStepDefs.claim_is_sent_to_the_compensator()
+    When Compensator acknowledges claimants withdrawal                # CompensatorStepDefs.compensator_acknowledges_claimants_withdrawal()
+    Then the claim can be Resolved                                    # CompensatorStepDefs.claim_resolved()

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<testsuite failures="0" name="cucumber.runtime.formatter.JUnitFormatter" skipped="0" tests="13" time="5358.674011">
+    <testcase classname="Journey 23" name="Unrep submits claim as owner" time="649.677413">
+        <system-out><![CDATA[Given unrep logins into whiplash application................................passed
+And claimant exits before submitting the claim..............................passed
+When user continues for claim creation as 'YES' , 'I was the driver' and 'EMAIL' with 'NO','Inside UK'.passed
+Then claim reference number for unrep claim is created......................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 23" name="Compensator receives claim and claim liability sent to TPA" time="92.587024">
+        <system-out><![CDATA[Given Claim  is sent to the compensator.....................................passed
+When compensator receives claim and send to TPA.............................passed
+Then claims acceptance and liability decision is now sent to TPA............passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 23" name="TPA  Accepts full liability" time="162.778362">
+        <system-out><![CDATA[Given the claim  has been sent to the TPA workbasket........................passed
+When TPA accepts full liability.............................................passed
+Then claims acceptance and liability information is passed to claimant......passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 23" name="unrep Claimant makes medical provider selection (DME) and adds losses and documents" time="198.366488">
+        <system-out><![CDATA[Given the unrep claim moves to full liability...............................passed
+When unrep selects medical preferences for an DME...........................passed
+Then medical preferences are sent to Independent Expert.....................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 23" name="DME uploads report-No prognosis" time="351.457888">
+        <system-out><![CDATA[Given claimant selects DME..................................................passed
+When claimant visits DME and completes checkup..............................passed
+Then DME uploads report no prognosis........................................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 23" name="Claimant add losses and fee" time="168.933576">
+        <system-out><![CDATA[Given DME uploads medical report............................................passed
+When 'unrep' add losses and fee.............................................passed
+Then claim will proceed to upload medical reports...........................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 23" name="Claimant decides to proceed with offer" time="456.697961">
+        <system-out><![CDATA[Given claimant reviews medical report when uploaded by DME..................passed
+When Claimant reviews report and proceed to offer...........................passed
+Then claim will be sent to compensator for review...........................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 23" name="Claimant should not be able to add losses/fee" time="498.304266">
+        <system-out><![CDATA[Given claimant has proceeded with offer.....................................passed
+When Claimant tries to add loss or fee......................................passed
+Then claimant should not be allowed to add loss/fee.........................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 23" name="TPA should not be able to add losses/fee" time="247.122772">
+        <system-out><![CDATA[Given claimant requests offer to TPA........................................passed
+When TPA tries to add loss/fee..............................................passed
+Then TPA should not be allowed to add loss/fee..............................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 23" name="TPA provides first offer with fee proposal" time="1478.135627">
+        <system-out><![CDATA[Given claimant requests offer to TPA........................................passed
+When the TPA makes first offer with fee proposal............................passed
+Then claim will be sent for claimant acknowledgement........................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 23" name="TPA decides to withdraw the offer" time="178.498998">
+        <system-out><![CDATA[Given TPA has made first offer to claimant..................................passed
+When TPA withdraws the offer at claim 'Pending-ReviewOffer'.................passed
+Then TPA gets an option to replace the offer................................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 23" name="TPA makes replacement offer" time="496.88591">
+        <system-out><![CDATA[Given TPA has withdrawn the first offer.....................................passed
+When replacement offer is made to claimant..................................passed
+Then claim offer is sent to claimant review.................................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 23" name="Claimants accepts final offer from TPA" time="379.227726">
+        <system-out><![CDATA[Given TPA has given replacement offer.......................................passed
+When Claimant accept the replacement offer..................................passed
+Then claim is resolved......................................................passed
+]]></system-out>
+    </testcase>
+</testsuite>

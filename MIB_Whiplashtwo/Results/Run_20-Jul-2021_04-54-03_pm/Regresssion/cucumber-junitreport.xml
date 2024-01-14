@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<testsuite failures="0" name="cucumber.runtime.formatter.JUnitFormatter" skipped="0" tests="13" time="4120.247625">
+    <testcase classname="Journey 17" name="Unrep claim creation as car owner" time="580.21213">
+        <system-out><![CDATA[Given unrep logins into whiplash application................................passed
+When user enter all mandatory details for claim creation as 'NO' , 'I was the driver' and 'BOTH' with 'NO','Inside UK'.passed
+Then claim reference number for unrep claim is created......................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 17" name="Compensator  Accept Claim and full Liability" time="166.395484">
+        <system-out><![CDATA[Given Claim  is sent to the compensator.....................................passed
+When compensator accepts claim and makes full liability without dispute.....passed
+Then the claims acceptance and liability is now sent to the claimant........passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 17" name="Unrep Provides Medical Preferences" time="187.058991">
+        <system-out><![CDATA[Given the unrep claim moves to full liability...............................passed
+When unrep selects medical preferences for an DME...........................passed
+Then medical preferences are sent to Independent Expert.....................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 17" name="DME uploads report-No prognosis" time="350.753168">
+        <system-out><![CDATA[Given claimant selects DME..................................................passed
+When claimant visits DME and completes checkup..............................passed
+Then DME uploads report no prognosis........................................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 17" name="Unrep reviews medical report and proceeds with offer" time="144.595889">
+        <system-out><![CDATA[Given DME uploads medical report............................................passed
+When claimant reviews medical report and acknowledges the report............passed
+Then claim is sent to compensator...........................................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 17" name="Compensator makes First Offer" time="245.648054">
+        <system-out><![CDATA[Given Claim  is sent to the compensator.....................................passed
+When the compensator makes first offer......................................passed
+Then offer is sent to claimant..............................................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 17" name="Unrep Claimant accepts offer and makes counter fees proposal." time="128.7198">
+        <system-out><![CDATA[Given Claimant received offer details.......................................passed
+When Claimant accepts offer and makes fees request..........................passed
+Then Acknowledgement for offer acceptance will be sent to compensator.......passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 17" name="Compensator makes fee proposal" time="118.770931">
+        <system-out><![CDATA[Given claimant has requested for fee........................................passed
+When compensator make fee proposal..........................................passed
+Then fee proposal is sent to claimant.......................................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 17" name="Claimant makes counter fees proposal" time="473.949446">
+        <system-out><![CDATA[Given Claimant receives the fee proposal from compensator...................passed
+When Claimant rejects the fee proposal......................................passed
+Then counter fee proposal is sent back to the compensator...................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 17" name="Compensator does not respond to counter fees proposal and claimant goes to court" time="362.350506">
+        <system-out><![CDATA[Given Compensator didn’t respond to claimant updated offer..................passed
+When claimant decides to challenge fee decision and decided to go to court..passed
+Then the claimant goes to court.............................................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 17" name="Compensator review and agrees to claimant court document" time="136.448509">
+        <system-out><![CDATA[Given claimant selects court documents compensator..........................passed
+When Compensator agrees to court documents when claim is in 'Pending-FeeListReview'.passed
+Then claim will be sent for claimant acknowledgement........................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 17" name="unrep Claimant checks the documents selected by compensator and submit the claim for court" time="922.174349">
+        <system-out><![CDATA[Given 'unrep' checks the documents uploaded by Compensator..................passed
+When 'unrep' submit the claim for court with claim 'Pending-FeeListAccept' for fee dispute.passed
+Then Case is closed with Go to court at offer stage.........................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 17" name="Verify the claim is in Resolved status" time="303.170368">
+        <system-out><![CDATA[Given 'unrep' goes to court.................................................passed
+When the claim goes to dispute at court at 'Resolved-CourtFees'.............passed
+Then the claim will be resolved at court....................................passed
+]]></system-out>
+    </testcase>
+</testsuite>

@@ -1,0 +1,74 @@
+@prouser
+Feature: Journey 27
+
+  Scenario Outline: Prouser Submit a Claim as passenger in bus                                                           # src/test/resources/features/prouser/journey27.feature:4
+    Given prouser logins into whiplash application
+    When prouser enter all mandatory details for claim creation as '<involvement_type_v>' and '<owner>' and '<multivrn>'
+    Then claim is created for prouser
+
+    Examples: 
+
+  @prouser
+  Scenario Outline: Prouser Submit a Claim as passenger in bus                                              # src/test/resources/features/prouser/journey27.feature:11
+    Given prouser logins into whiplash application                                                          # ProUserActionsStepDefs.prouser_logins_into_whiplash_applicataion_using()
+    When prouser enter all mandatory details for claim creation as 'A passenger on a bus' and 'NO' and 'NO' # ProUserActionsStepDefs.prouser_Enter_All_Mandatory_Details_For_Claim_Creation(String,String,String)
+    Then claim is created for prouser                                                                       # ProUserActionsStepDefs.claim_Is_Created()
+
+  Scenario: Compensator receives claim and claim liability sent to TPA # src/test/resources/features/prouser/journey27.feature:13
+    Given Claim  is sent to the compensator                            # CompensatorStepDefs.claim_is_sent_to_the_compensator()
+    When compensator receives claim and send to TPA                    # CompensatorStepDefs.compensator_receives_claim_send_TPA()
+    Then claims acceptance and liability decision is now sent to TPA   # CompensatorStepDefs.claims_acceptance_liability_decision_sent_TPA()
+
+  Scenario: TPA accepts full liability                                     # src/test/resources/features/prouser/journey27.feature:18
+    Given Login as TPA                                                     # TPAStepDefs.login_As_TPA()
+    When TPA accepts full liability                                        # TPAStepDefs.tpa_accepts_full_liability()
+    Then claims acceptance and liability information is passed to claimant # TPAStepDefs.claims_Acceptance_Denied_Liability_passedto_claimant()
+
+  Scenario Outline: Claimant add losses and fee       # src/test/resources/features/prouser/journey27.feature:23
+    Given claim liability is accepted
+    When '<claimant>' add losses and fee
+    Then claim will proceed to upload medical reports
+
+    Examples: 
+
+  @prouser
+  Scenario Outline: Claimant add losses and fee       # src/test/resources/features/prouser/journey27.feature:29
+    Given claim liability is accepted                 # ClaimantActionsStepDefs.claim_liability_accepted()
+    When 'prouser' add losses and fee                 # ClaimantActionsStepDefs.claimants_add_losses_fee(String)
+    Then claim will proceed to upload medical reports # ClaimantActionsStepDefs.proceed_to_upload_medical_reports()
+
+  Scenario Outline: Prouser  uploads medical Report    # src/test/resources/features/prouser/journey27.feature:32
+    Given '<claimant>' receives claim
+    When claimant uploads medical report at '<status>'
+    Then report is uploaded and sent to compensator
+
+    Examples: 
+
+  @prouser
+  Scenario Outline: Prouser  uploads medical Report           # src/test/resources/features/prouser/journey27.feature:39
+    Given 'prouser' receives claim                            # ClaimantActionsStepDefs.user_Receives_Claim(String)
+    When claimant uploads medical report at 'Pending-Medical' # ProUserActionsStepDefs.medical_report_prouser(String)
+    Then report is uploaded and sent to compensator           # ProUserActionsStepDefs.report_sent_to_compensator()
+
+  Scenario: TPA disputes causation at offer and decides not to make any offer # src/test/resources/features/prouser/journey27.feature:41
+    Given claimant requests offer to TPA                                      # TPAStepDefs.claimant_requests_offer()
+    When TPA disputes causation at offer                                      # TPAStepDefs.compensator_disputes_causation_at_offer()
+    Then claim is sent to claimant                                            # CompensatorStepDefs.claim_sent_to_claimant()
+
+  Scenario: Claimant accepts the decision and no offer is made # src/test/resources/features/prouser/journey27.feature:46
+    Given TPA has disputed causation for prouser               # ProUserActionsStepDefs.compensator_has_disputed_causation()
+    When Prouser accepts the dispute causation no offer        # ProUserActionsStepDefs.mibpro_accepts_the_dispute_no_offer()
+    Then claim moves to Resolved-NoOffer                       # ClaimantActionsStepDefs.claim_moves_to_resolved_no_offer()
+
+  Scenario Outline: The claim is moved to 'Resolved-NoOffer' # src/test/resources/features/prouser/journey27.feature:51
+    Given '<claimant>' goes to court
+    When prouser claim status is '<status>'
+    Then claim is resolved
+
+    Examples: 
+
+  @prouser
+  Scenario Outline: The claim is moved to 'Resolved-NoOffer' # src/test/resources/features/prouser/journey27.feature:57
+    Given 'prouser' goes to court                            # ClaimantActionsStepDefs.claimant_goes_to_court(String)
+    When prouser claim status is 'Resolved-NoOffer'          # ProUserActionsStepDefs.claim_goes_to_dispute_at_court(String)
+    Then claim is resolved                                   # ClaimantActionsStepDefs.claim_is_resolved()

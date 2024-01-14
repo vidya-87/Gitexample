@@ -1,0 +1,153 @@
+@prouser
+Feature: Journey 10
+
+  Scenario Outline: Prouser Submit a Claim as passenger in a car                                                         # src/test/resources/features/prouser/journey10.feature:4
+    Given prouser logins into whiplash application
+    When prouser enter all mandatory details for claim creation as '<involvement_type_v>' and '<owner>' and '<multivrn>'
+    Then claim is created for prouser
+
+    Examples: 
+
+  @prouser
+  Scenario Outline: Prouser Submit a Claim as passenger in a car                                                       # src/test/resources/features/prouser/journey10.feature:11
+    Given prouser logins into whiplash application                                                                     # ProUserActionsStepDefs.prouser_logins_into_whiplash_applicataion_using()
+    When prouser enter all mandatory details for claim creation as 'A passenger in a car/van/lorry' and 'NO' and 'YES' # ProUserActionsStepDefs.prouser_Enter_All_Mandatory_Details_For_Claim_Creation(String,String,String)
+    Then claim is created for prouser                                                                                  # ProUserActionsStepDefs.claim_Is_Created()
+
+  Scenario: CSR allocates claim to  compensator                           # src/test/resources/features/prouser/journey10.feature:14
+    Given Claim received by csr and eligible for assigning to compensator # CSRStepDefs.claim_received_by_csr()
+    When CSR assigns compensator                                          # CSRStepDefs.csr_assigns_compensator()
+    Then Claim is sent to respective compensator                          # CSRStepDefs.claim_sent_to_compensator()
+
+  Scenario: Compensator receives claim and claim liability sent to TPA # src/test/resources/features/prouser/journey10.feature:19
+    Given Claim  is sent to the compensator                            # CompensatorStepDefs.claim_is_sent_to_the_compensator()
+    When compensator receives claim and send to TPA                    # CompensatorStepDefs.compensator_receives_claim_send_TPA()
+    Then claims acceptance and liability decision is now sent to TPA   # CompensatorStepDefs.claims_acceptance_liability_decision_sent_TPA()
+
+  Scenario: TPA dispute denies liability                                   # src/test/resources/features/prouser/journey10.feature:24
+    Given the claim  has been sent to the TPA workbasket                   # TPAStepDefs.claim_has_been_sent_to_TPA()
+    When TPA dispute claim liability                                       # TPAStepDefs.tpa_accepts_claim__denies_claim_liability()
+    Then claims acceptance and liability information is passed to claimant # TPAStepDefs.claims_Acceptance_Denied_Liability_passedto_claimant()
+
+  Scenario: Prouser challenge decision and go to court and submit documents # src/test/resources/features/prouser/journey10.feature:30
+    Given Prouser claim liability has been rejected                         # ProUserActionsStepDefs.prouser_claim_liability_rejected()
+    When prouser wants to challenge decision and decided to go to court     # ProUserActionsStepDefs.prouser_challenge_decision_go_to_court()
+    Then the claimant goes to court                                         # ClaimantActionsStepDefs.the_claimant_goes_to_court()
+
+  Scenario Outline: TPA disagree for document selection                      # src/test/resources/features/prouser/journey10.feature:35
+    Given Uploaded documents for court cofirmed by Claimant
+    When TPA disagrees to court documents uploaded by Claimant at '<status>'
+    Then claimant need to review the documents uploaded by TPA
+
+    Examples: 
+
+  @prouser
+  Scenario Outline: TPA disagree for document selection                                         # src/test/resources/features/prouser/journey10.feature:41
+    Given Uploaded documents for court cofirmed by Claimant                                     # TPAStepDefs.court_documents_confirmed_claimant()
+    When TPA disagrees to court documents uploaded by Claimant at 'Pending-LiabilityListReview' # TPAStepDefs.tpa_disagrees_court_document_from_claimant(String)
+    Then claimant need to review the documents uploaded by TPA                                  # TPAStepDefs.claimant_review_the_documents_uploaded_tpa()
+
+  Scenario: prouser Claimant acknowledges TPA doc selection and case is resolved # src/test/resources/features/prouser/journey10.feature:43
+    Given prouser receives claim for acknowledgement                             # ProUserActionsStepDefs.prouser_receives_the_claim_for_acknowledgement()
+    When prouser claimant acknowledge for liability challenge                    # ProUserActionsStepDefs.prouser_acknowledge_liability_challenge()
+    Then case is closed at court stage                                           # ProUserActionsStepDefs.claim_sent_to_prouser_acknowledgement()
+
+  Scenario: TPA reopens claim and make full liability to claimant # src/test/resources/features/prouser/journey10.feature:48
+    Given Claim is resolved at court                              # TPAStepDefs.claimant_uploads_court_documents()
+    When TPA reopens liability disputed claim                     # TPAStepDefs.tpa_repoens_liability_disputed_claim()
+    Then TPA accepts full liability after reopening the claim     # TPAStepDefs.tpa_accepts_full_liability_after_reopen()
+
+  Scenario Outline: Prouser  uploads medical Report with waitout prognosis and decides waitout and release report to TPA # src/test/resources/features/prouser/journey10.feature:53
+    Given '<claimant>' receives claim
+    And '<claimant>' adds fee
+    When prouser uploads the medical report with waitout prognosis '<status>' and decides to waitout
+    Then report is uploaded and sent to compensator
+
+    Examples: 
+
+  @prouser
+  Scenario Outline: Prouser  uploads medical Report with waitout prognosis and decides waitout and release report to TPA # src/test/resources/features/prouser/journey10.feature:61
+    Given 'prouser' receives claim                                                                                       # ClaimantActionsStepDefs.user_Receives_Claim(String)
+    And 'prouser' adds fee                                                                                               # ClaimantActionsStepDefs.claimants_add_fee(String)
+    When prouser uploads the medical report with waitout prognosis 'Pending-MedicalAfterCourt' and decides to waitout    # ProUserActionsStepDefs.claimant_upload_medical_report(String)
+    Then report is uploaded and sent to compensator                                                                      # ProUserActionsStepDefs.report_sent_to_compensator()
+
+  Scenario: Prouser decides to proceed with offer                       # src/test/resources/features/prouser/journey10.feature:63
+    Given claimant is in prognosis period                               # ProUserActionsStepDefs.claimant_is_in_prognosis_period()
+    When claimant decides to proceed with offer during prognosis period # ProUserActionsStepDefs.claimant_decides_to_proceed_with_offer_during_prognosis_period()
+    Then claim will be sent to TPA for offer                            # ProUserActionsStepDefs.prouser_sent_claim_for_first_offer()
+
+  Scenario: TPA First Offer to Prouser                   # src/test/resources/features/prouser/journey10.feature:68
+    Given claimant requests offer to TPA                 # TPAStepDefs.claimant_requests_offer()
+    When the TPA makes first offer with fee proposal     # TPAStepDefs.compensator_first_offer_fee_proposal()
+    Then claim will be sent for claimant acknowledgement # TPAStepDefs.claim_sent_for_claimant_ack()
+
+  Scenario Outline: Claimant Accepts First Offer to TPA                   # src/test/resources/features/prouser/journey10.feature:73
+    Given '<claimant>' receives the offer
+    When Prousuer accepts offer
+    Then Acknowledgement for offer acceptance will be sent to compensator
+
+    Examples: 
+
+  @prouser
+  Scenario Outline: Claimant Accepts First Offer to TPA                   # src/test/resources/features/prouser/journey10.feature:79
+    Given 'prouser' receives the offer                                    # ClaimantActionsStepDefs.receives_first_offer(String)
+    When Prousuer accepts offer                                           # ClaimantActionsStepDefs.prouser_accepts_offer()
+    Then Acknowledgement for offer acceptance will be sent to compensator # ClaimantActionsStepDefs.acknowledgement_for_offer_acceptance_will_be_sent_to_compensator()
+
+  Scenario Outline: TPA acknowledge claimant offer              # src/test/resources/features/prouser/journey10.feature:81
+    Given claimant accepts the offer
+    When TPA acknowledges claimants offer with claim '<status>'
+    Then claim SLA is breached
+
+    Examples: 
+
+  @prouser
+  Scenario Outline: TPA acknowledge claimant offer                             # src/test/resources/features/prouser/journey10.feature:87
+    Given claimant accepts the offer                                           # TPAStepDefs.claimant_accepts_the_offer_from_tpa()
+    When TPA acknowledges claimants offer with claim 'Pending-Acknowledgement' # TPAStepDefs.TPA_acknowledges_claimants_offer(String)
+    Then claim SLA is breached                                                 # CompensatorStepDefs.claim_sla_breached()
+
+  Scenario: Claimant decides to go to court (OCS3)                   # src/test/resources/features/prouser/journey10.feature:89
+    Given SLA is breached for non-payment                            # ProUserActionsStepDefs.sla_breached_non_payment()
+    When prouser decides to go to court for claim settlement pending # ProUserActionsStepDefs.prouser_go_to_court_select_court_document()
+    Then documents will be sent to TPA                               # ClaimantActionsStepDefs.documents_will_be_sent_tpa()
+
+  Scenario Outline: TPA acknowledges documents selected for court  # src/test/resources/features/prouser/journey10.feature:94
+    Given claimant selects court documents TPA
+    When TPA agrees to court documents when claim is in '<status>'
+    Then claim is sent to claimant
+
+    Examples: 
+
+  @prouser
+  Scenario Outline: TPA acknowledges documents selected for court                 # src/test/resources/features/prouser/journey10.feature:100
+    Given claimant selects court documents TPA                                    # TPAStepDefs.claimant_select_court_docs_tpa()
+    When TPA agrees to court documents when claim is in 'Pending-OfferListReview' # TPAStepDefs.tpa_agree_court_documents(String)
+    Then claim is sent to claimant                                                # CompensatorStepDefs.claim_sent_to_claimant()
+
+  Scenario Outline: Claimant checks the documents selected by Compensator and proceeds the claim for court # src/test/resources/features/prouser/journey10.feature:102
+    Given '<claimant>' checks the documents uploaded by Compensator
+    When '<claimant>' submit the claim for court with claim '<status>'
+    Then Case is closed with Go to court at offer stage
+
+    Examples: 
+
+  @prouser
+  Scenario Outline: Claimant checks the documents selected by Compensator and proceeds the claim for court # src/test/resources/features/prouser/journey10.feature:108
+    Given 'prouser' checks the documents uploaded by Compensator                                           # ClaimantActionsStepDefs.claimant_verifies_documents_from_compensator(String)
+    When 'prouser' submit the claim for court with claim 'Pending-OfferListAccept'                         # ClaimantActionsStepDefs.claimant_submit_claim_to_court(String,String)
+    Then Case is closed with Go to court at offer stage                                                    # ClaimantActionsStepDefs.go_to_court_claim_closed()
+
+  Scenario Outline: The claim is moved to 'Resolved-NonPayment' # src/test/resources/features/prouser/journey10.feature:110
+    Given '<claimant>' goes to court
+    When prouser claim goes to dispute at court at '<status>'
+    Then the claim will be resolved at court
+
+    Examples: 
+
+  @prouser
+  Scenario Outline: The claim is moved to 'Resolved-NonPayment'          # src/test/resources/features/prouser/journey10.feature:116
+    Given 'prouser' goes to court                                        # ClaimantActionsStepDefs.claimant_goes_to_court(String)
+    When prouser claim goes to dispute at court at 'Resolved-NonPayment' # ProUserActionsStepDefs.prouser_claim_goes_to_dispute_at_court(String)
+    Then the claim will be resolved at court                             # ClaimantActionsStepDefs.the_claim_will_resolved_at_court()

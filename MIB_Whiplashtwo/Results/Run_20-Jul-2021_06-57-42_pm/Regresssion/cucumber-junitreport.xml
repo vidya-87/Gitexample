@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<testsuite failures="0" name="cucumber.runtime.formatter.JUnitFormatter" skipped="0" tests="6" time="1658.995425">
+    <testcase classname="Journey 18" name="Unrep claim creation as car owner" time="537.656986">
+        <system-out><![CDATA[Given unrep logins into whiplash application................................passed
+When user enter all mandatory details for claim creation as 'NO' , 'I was the driver' and 'BOTH' with 'NO','Inside UK'.passed
+Then claim reference number for unrep claim is created......................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 18" name="Compensator  Accept Claim and full Liability" time="155.960717">
+        <system-out><![CDATA[Given Claim  is sent to the compensator.....................................passed
+When compensator accepts claim and makes full liability without dispute.....passed
+Then the claims acceptance and liability is now sent to the claimant........passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 18" name="Unrep Provides Medical Preferences" time="161.969033">
+        <system-out><![CDATA[Given the unrep claim moves to full liability...............................passed
+When unrep selects medical preferences for an DME...........................passed
+Then medical preferences are sent to Independent Expert.....................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 18" name="DME uploads report-with Wait out prognosis more than twenty four months" time="361.257992">
+        <system-out><![CDATA[Given claimant selects DME..................................................passed
+When DME upload medical report with prognois time...........................passed
+Then Report is sent to claimant.............................................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 18" name="Claimant decides to withdraw claim based on threshold message indicating claim can be withdrawn if needed." time="92.860327">
+        <system-out><![CDATA[Given claimant reviews medical report when uploaded by DME..................passed
+When the unrep claimant then decides to withdraw the claim at 'Pending-CheckMedical'.passed
+Then the claimant has withdrawn claim and Compensator to acknowledge this...passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Journey 18" name="Compensator acknowledges the withdrawl and claim resolved" time="349.29037">
+        <system-out><![CDATA[Given Claim  is sent to the compensator.....................................passed
+When Compensator acknowledges claimants withdrawal..........................passed
+Then the claim can be Resolved..............................................passed
+]]></system-out>
+    </testcase>
+</testsuite>

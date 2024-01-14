@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite configfailurepolicy="continue" thread-count="1" parallel="tests" name="Failed suite [MIBWhiplash]" guice-stage="DEVELOPMENT">
+  <test thread-count="1" parallel="tests" name="Regression Tests(failed)">
+    <parameter name="BrowserName" value="CHROME"/>
+    <parameter name="ExecutionMode" value="LOCAL"/>
+    <classes>
+      <class name="com.cucumbercraft.runners.RunCucumberTests_WhiplashRegression">
+        <methods>
+          <include name="afterClass"/>
+          <include name="afterTest"/>
+          <include name="setUpClass"/>
+          <include name="beforeClass"/>
+          <include name="afterSuite"/>
+          <include name="feature" invocation-numbers="0"/>
+          <include name="beforeTest"/>
+          <include name="tearDownClass"/>
+          <include name="beforeSuite"/>
+        </methods>
+      </class> <!-- com.cucumbercraft.runners.RunCucumberTests_WhiplashRegression -->
+    </classes>
+  </test> <!-- Regression Tests(failed) -->
+</suite> <!-- Failed suite [MIBWhiplash] -->

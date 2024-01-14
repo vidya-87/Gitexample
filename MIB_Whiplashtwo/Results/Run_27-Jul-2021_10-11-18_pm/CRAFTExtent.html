@@ -1,0 +1,1067 @@
+
+<!DOCTYPE html>
+<html>
+
+
+<head>
+	<meta charset='UTF-8' /> 
+	<meta name='description' content='' />
+	<meta name='robots' content='noodp, noydir' />
+	<meta name='viewport' content='width=device-width, initial-scale=1' />
+	<meta id="timeStampFormat" name="timeStampFormat" content='MMM d, yyyy hh:mm:ss a'/>
+	
+	<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600' rel='stylesheet' type='text/css'>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+		<link href='https://cdn.rawgit.com/anshooarora/extentreports-java/bee7a4abdc590e21eec8618a90c81ff4d16e500a/dist/css/extent.css' type='text/css' rel='stylesheet' />
+	
+	<title>CRAFT Reporting</title>
+
+	<style type='text/css'>
+	</style>
+</head>
+
+	<body class='extent standard default hide-overflow bdd-report'>
+		<div id='theme-selector' alt='Click to toggle theme. To enable by default, use theme configuration.' title='Click to toggle theme. To enable by default, use theme configuration.'>
+			<span><i class='material-icons'>desktop_windows</i></span>
+		</div>
+
+<nav>
+	<div class="nav-wrapper">
+		<a href="#!" class="brand-logo blue darken-3">Extent</a>
+
+		<!-- slideout menu -->
+		<ul id='slide-out' class='side-nav fixed hide-on-med-and-down'>
+			<li class='waves-effect active'><a href='#!' view='test-view' onclick="configureView(0);chartsView('test');"><i class='material-icons'>dashboard</i></a></li>
+						<li class='waves-effect'><a href='#!' view='category-view' onclick="configureView(1)"><i class='material-icons'>label_outline</i></a></li>
+			<li class='waves-effect'><a href='#!' onclick="configureView(-1);chartsView('dashboard');" view='dashboard-view'><i class='material-icons'>track_changes</i></i></a></li>
+		</ul>
+
+		<!-- report name -->
+		<span class='report-name'>Extent Reports</span>
+		
+		<!-- report headline -->
+		<span class='report-headline'></span>
+
+		<!-- nav-right -->
+		<ul id='nav-mobile' class='right hide-on-med-and-down nav-right'>
+			<li>
+                <a href='#!'>
+                    <span class='label suite-start-time blue darken-3'>Jul 27, 2021 10:11:20 PM</span>
+				</a>
+			</li>
+			<li>
+                <a href='#!'>
+                    <span class='label blue darken-3'>v3.1.1</span>
+				</a>
+			</li>
+		</ul>
+	</div>
+</nav>
+
+		<!-- container -->
+		<div class='container'>
+
+<div id='test-view' class='view'>
+				
+	<section id='controls'>
+		<div class='controls grey lighten-4'>
+			<!-- test toggle -->
+			<div class='chip transparent'>
+				<a class='dropdown-button tests-toggle' data-activates='tests-toggle' data-constrainwidth='true' data-beloworigin='true' data-hover='true' href='#'>
+					<i class='material-icons'>warning</i> Status
+				</a>
+				<ul id='tests-toggle' class='dropdown-content'>
+											<li status='pass'><a href='#!'>Pass <i class='material-icons green-text'>check_circle</i></a></li>
+					<li class='divider'></li>
+					<li status='clear' clear='true'><a href='#!'>Clear Filters <i class='material-icons'>clear</i></a></li>
+				</ul>
+			</div>
+			<!-- test toggle -->
+
+			<!-- category toggle -->
+			<div class='chip transparent'>
+				<a class='dropdown-button category-toggle' data-activates='category-toggle' data-constrainwidth='false' data-beloworigin='true' data-hover='true' href='#'>
+					<i class='material-icons'>local_offer</i> Category
+				</a>
+				<ul id='category-toggle' class='dropdown-content'>
+					<li><a href='#'>@prouser</a></li>
+					<li class='divider'></li>
+					<li class='clear'><a href='#!' clear='true'>Clear Filters</a></li>
+				</ul>
+			</div>
+			<!-- category toggle -->
+
+			<!-- clear filters -->
+			<div class='chip transparent hide'>
+				<a class='' id='clear-filters' alt='Clear Filters' title='Clear Filters'>
+					<i class='material-icons'>close</i> Clear
+				</a>
+			</div>
+			<!-- clear filters -->
+
+			<!-- enable dashboard -->
+			<div id='toggle-test-view-charts' class='chip transparent'>
+				<a class='pink-text' id='enable-dashboard' alt='Enable Dashboard' title='Enable Dashboard'>
+					<i class='material-icons'>track_changes</i> Dashboard
+				</a>
+			</div>
+			<!-- enable dashboard -->
+
+			<!-- search -->
+			<div class='chip transparent' alt='Search Tests' title='Search Tests'>
+				<a href="#" class='search-div'>
+					<i class='material-icons'>search</i> Search
+				</a>
+
+				<div class='input-field left hide'>
+					<input id='search-tests' type='text' class='validate browser-default' placeholder='Search Tests...'>
+				</div>
+				
+			</div>
+			<!-- search -->
+		</div>
+	</section>
+
+
+<div id='test-view-charts' class='subview-full'>
+	<div id='charts-row' class='row nm-v nm-h'>
+		<div class='col s12 m4 l4 np-h'>
+			<div class='card-panel nm-v'>
+				<div class='left panel-name'>Features</div>
+				<div class='chart-box'>
+					<canvas id='parent-analysis' width='100' height='80'></canvas>
+				</div>
+				<div class='block text-small'>
+					<span class='tooltipped' data-position='top' data-tooltip='100%'><span class='strong'>1</span> feature(s) passed</span>
+				</div>
+				<div class='block text-small'>
+					<span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> feature(s) failed, <span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> others
+				</div>
+			</div>
+		</div>
+		
+		<div class='col s12 m4 l4 np-h'>
+			<div class='card-panel nm-v'>
+				<div class='left panel-name'>Scenarios</div>
+				<div class='chart-box'>
+					<canvas id='child-analysis' width='100' height='80'></canvas>
+				</div>
+				<div class='block text-small'>
+					<span class='tooltipped' data-position='top' data-tooltip='100%'><span class='strong'>15</span> scenario(s) passed</span>
+				</div>
+				<div class='block text-small'>
+					<span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> scenario(s) failed, <span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> others
+				</div>
+			</div>
+		</div>
+		
+		<div class='col s12 m4 l4 np-h'>
+			<div class='card-panel nm-v'>
+				<div class='left panel-name'>Steps</div>
+				<div class='chart-box'>
+					<canvas id='grandchild-analysis' width='100' height='80'></canvas>
+				</div>
+				<div class='block text-small'>
+					<span class='tooltipped' data-position='top' data-tooltip='100%'><span class='strong'>46</span> step(s) passed</span>
+				</div>
+				<div class='block text-small'>
+					<span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> step(s) failed, <span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> others
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+	<div class='subview-left left'>
+		
+		<div class='view-summary'>
+			<h5>Features</h5>
+			<ul id='test-collection' class='test-collection'>
+				
+				
+				<li class='test displayed active has-leaf pass' status='pass' bdd='true' test-id='1'>
+					<div class='test-heading'>
+						<span class='test-name'>Journey 31</span>
+						<span class='test-time'>Jul 27, 2021 10:11:21 PM</span>
+						<span class='test-status right pass'>pass</span>
+					</div>
+					<div class='test-content hide'>
+<div class='scenariooutline node' test-id='2' status='pass'>
+	<span class='duration right label'>0h 9m 13s+245ms</span>
+	<div class='desc'>
+		<b>ScenarioOutline</b>
+		<span class="desc-text">Prouser Submit a Claim as passenger in bus</span>
+	</div>
+	<ul class='steps'>
+		<li test-id='3' class='node scenario pass' status='pass'>
+			<div class='category-list'>
+				<span class='category label white-text'>@prouser</span>
+			</div>
+			
+			<b>Scenario</b>
+			
+			<span class="bdd-step-name">Prouser Submit a Claim as passenger in bus</span>
+				<div class='pre'>Prouser Submit a Claim as passenger in bus</div>
+			
+				<ul class='steps'>
+					<li test-id='4' class='node given pass' status='pass'><b>Given</b>
+						<span class="bdd-step-name">Given prouser logins into whiplash application</span>
+							<div class='pre'>Username : Pro212@mailinator.com
+Password : Password@123</div>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='5' class='node when pass' status='pass'><b>When</b>
+						<span class="bdd-step-name">When prouser enter all mandatory details for claim creation as 'A passenger on a bus' and 'NO' and 'NO'</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='6' class='node then pass' status='pass'><b>Then</b>
+						<span class="bdd-step-name">Then claim is created for prouser</span>
+							<div class='pre'>passed</div>
+					</li>
+				</ul>
+		</li>
+	</ul>
+</div>
+<div class='scenario node' test-id='7' status='pass'>
+	<span class='duration right label'>0h 1m 30s+80ms</span>
+	<div class='desc'>
+		<b>Scenario</b>
+		<span class="desc-text">Compensator receives claim and claim liability sent to TPA</span>
+	</div>
+	<ul class='steps'>
+		<li test-id='8' class='node given pass' status='pass'>
+			
+			<b>Given</b>
+			
+			<span class="bdd-step-name">Given Claim  is sent to the compensator</span>
+				<div class='pre'>Username : autocomp1@mailinator.com
+Password : Password@123</div>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='9' class='node when pass' status='pass'>
+			
+			<b>When</b>
+			
+			<span class="bdd-step-name">When compensator receives claim and send to TPA</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='10' class='node then pass' status='pass'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then claims acceptance and liability decision is now sent to TPA</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+	</ul>
+</div>
+<div class='scenario node' test-id='11' status='pass'>
+	<span class='duration right label'>0h 2m 27s+520ms</span>
+	<div class='desc'>
+		<b>Scenario</b>
+		<span class="desc-text">TPA accepts full liability</span>
+	</div>
+	<ul class='steps'>
+		<li test-id='12' class='node given pass' status='pass'>
+			
+			<b>Given</b>
+			
+			<span class="bdd-step-name">Given Login as TPA</span>
+				<div class='pre'>Username : autotpanew@mailinator.com
+Password : Password@123</div>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='13' class='node when pass' status='pass'>
+			
+			<b>When</b>
+			
+			<span class="bdd-step-name">When TPA accepts full liability</span>
+				<div class='pre'>The claim status is: Pending-Liability</div>
+				<div class='pre'>Status matched..</div>
+				<div class='pre'>GreenBox text matched..</div>
+				<div class='pre'>System greenbox text : Check the claim and make a liability response.
+Excel greenbox text : Check the claim and make a liability response.</div>
+				<div class='pre'>GreenBox text matched..</div>
+				<div class='pre'>System greenbox text : The claimant is arranging their medical examination. You do not need to do anything at this stage.
+Excel greenbox text : The claimant is arranging their medical examination. You do not need to do anything at this stage.</div>
+				<div class='pre'>System status : 
+Excel greenbox text : Pending-Medical</div>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='14' class='node then pass' status='pass'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then claims acceptance and liability information is passed to claimant</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+	</ul>
+</div>
+<div class='scenariooutline node' test-id='15' status='pass'>
+	<span class='duration right label'>0h 5m 25s+663ms</span>
+	<div class='desc'>
+		<b>ScenarioOutline</b>
+		<span class="desc-text">Prouser uploads medical report</span>
+	</div>
+	<ul class='steps'>
+		<li test-id='16' class='node scenario pass' status='pass'>
+			<div class='category-list'>
+				<span class='category label white-text'>@prouser</span>
+			</div>
+			
+			<b>Scenario</b>
+			
+			<span class="bdd-step-name">Prouser uploads medical report</span>
+				<div class='pre'>Prouser uploads medical report</div>
+			
+				<ul class='steps'>
+					<li test-id='17' class='node given pass' status='pass'><b>Given</b>
+						<span class="bdd-step-name">Given upload medical report is enabled for 'prouser'</span>
+							<div class='pre'>Username : Pro212@mailinator.com
+Password : Password@123</div>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='18' class='node and pass' status='pass'><b>And</b>
+						<span class="bdd-step-name">And 'prouser' adds fee</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='19' class='node when pass' status='pass'><b>When</b>
+						<span class="bdd-step-name">When claimant uploads medical report at 'Pending-Medical'</span>
+							<div class='pre'>The claim status is: Pending-Medical</div>
+							<div class='pre'>Status matched..</div>
+							<div class='pre'>GreenBox text matched..</div>
+							<div class='pre'>System greenbox text : The compensator has accepted liability in full. You need to proceed to arrange a medical examination and upload the report .
+Excel greenbox text : The compensator has accepted liability in full. You need to proceed to arrange a medical examination and upload the report .</div>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='20' class='node then pass' status='pass'><b>Then</b>
+						<span class="bdd-step-name">Then medical report is uploaded and offer request is sent to compensator</span>
+							<div class='pre'>passed</div>
+					</li>
+				</ul>
+		</li>
+	</ul>
+</div>
+<div class='scenario node' test-id='21' status='pass'>
+	<span class='duration right label'>0h 10m 10s+951ms</span>
+	<div class='desc'>
+		<b>Scenario</b>
+		<span class="desc-text">TPA makes First Offer with fee proposal</span>
+	</div>
+	<ul class='steps'>
+		<li test-id='22' class='node given pass' status='pass'>
+			
+			<b>Given</b>
+			
+			<span class="bdd-step-name">Given claimant requests offer to TPA</span>
+				<div class='pre'>Username : autotpanew@mailinator.com
+Password : Password@123</div>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='23' class='node when pass' status='pass'>
+			
+			<b>When</b>
+			
+			<span class="bdd-step-name">When the TPA makes first offer with fee proposal</span>
+				<div class='pre'>The claim status is: Pending-FirstOffer</div>
+				<div class='pre'>Status matched..</div>
+				<div class='pre'>GreenBox text matched..</div>
+				<div class='pre'>System greenbox text : The claimant has asked for an offer. Select Make offer to proceed.
+Excel greenbox text : The claimant has asked for an offer. Select Make offer to proceed.</div>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='24' class='node then pass' status='pass'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then claim offer is sent to claimant review</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+	</ul>
+</div>
+<div class='scenariooutline node' test-id='25' status='pass'>
+	<span class='duration right label'>0h 1m 35s+104ms</span>
+	<div class='desc'>
+		<b>ScenarioOutline</b>
+		<span class="desc-text">TPA withdraws the first offer</span>
+	</div>
+	<ul class='steps'>
+		<li test-id='26' class='node scenario pass' status='pass'>
+			<div class='category-list'>
+				<span class='category label white-text'>@prouser</span>
+			</div>
+			
+			<b>Scenario</b>
+			
+			<span class="bdd-step-name">TPA withdraws the first offer</span>
+				<div class='pre'>TPA withdraws the first offer</div>
+			
+				<ul class='steps'>
+					<li test-id='27' class='node given pass' status='pass'><b>Given</b>
+						<span class="bdd-step-name">Given Login as TPA</span>
+							<div class='pre'>Username : autotpanew@mailinator.com
+Password : Password@123</div>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='28' class='node when pass' status='pass'><b>When</b>
+						<span class="bdd-step-name">When TPA withdraws the offer at claim 'Pending-ReviewOffer'</span>
+							<div class='pre'>The claim status is: Pending-ReviewOffer</div>
+							<div class='pre'>Status matched..</div>
+							<div class='pre'>GreenBox text matched..</div>
+							<div class='pre'>System greenbox text : The claimant is reviewing the offer. You do not need to do anything else at this stage.
+Excel greenbox text : The claimant is reviewing the offer. You do not need to do anything else at this stage.</div>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='29' class='node then pass' status='pass'><b>Then</b>
+						<span class="bdd-step-name">Then TPA gets an option to replace the offer</span>
+							<div class='pre'>passed</div>
+					</li>
+				</ul>
+		</li>
+	</ul>
+</div>
+<div class='scenario node' test-id='30' status='pass'>
+	<span class='duration right label'>0h 1m 32s+604ms</span>
+	<div class='desc'>
+		<b>Scenario</b>
+		<span class="desc-text">TPA replace offer</span>
+	</div>
+	<ul class='steps'>
+		<li test-id='31' class='node given pass' status='pass'>
+			
+			<b>Given</b>
+			
+			<span class="bdd-step-name">Given TPA has withdrawn the first offer</span>
+				<div class='pre'>Username : autotpanew@mailinator.com
+Password : Password@123</div>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='32' class='node when pass' status='pass'>
+			
+			<b>When</b>
+			
+			<span class="bdd-step-name">When replacement offer is made to claimant</span>
+				<div class='pre'>The claim status is: Pending-ReplaceOffer</div>
+				<div class='pre'>Status matched..</div>
+				<div class='pre'>GreenBox text matched..</div>
+				<div class='pre'>System greenbox text : You have withdrawn the offer. You may make a replacement offer. You may want to contact the claimant to explain.
+Excel greenbox text : You have withdrawn the offer. You may make a replacement offer. You may want to contact the claimant to explain.</div>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='33' class='node then pass' status='pass'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then claim will be sent for claimant acknowledgement</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+	</ul>
+</div>
+<div class='scenariooutline node' test-id='34' status='pass'>
+	<span class='duration right label'>0h 9m 42s+974ms</span>
+	<div class='desc'>
+		<b>ScenarioOutline</b>
+		<span class="desc-text">Prouser rejects the first offer to Compensator</span>
+	</div>
+	<ul class='steps'>
+		<li test-id='35' class='node scenario pass' status='pass'>
+			<div class='category-list'>
+				<span class='category label white-text'>@prouser</span>
+			</div>
+			
+			<b>Scenario</b>
+			
+			<span class="bdd-step-name">Prouser rejects the first offer to Compensator</span>
+				<div class='pre'>Prouser rejects the first offer to Compensator</div>
+			
+				<ul class='steps'>
+					<li test-id='36' class='node given pass' status='pass'><b>Given</b>
+						<span class="bdd-step-name">Given 'prouser' receives the offer</span>
+							<div class='pre'>Username : Pro212@mailinator.com
+Password : Password@123</div>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='37' class='node when pass' status='pass'><b>When</b>
+						<span class="bdd-step-name">When 'prouser' reject the offer</span>
+							<div class='pre'>The claim status is: Pending-ReviewOffer</div>
+							<div class='pre'>Status matched..</div>
+							<div class='pre'>GreenBox text matched..</div>
+							<div class='pre'>System greenbox text : The compensator has made your client an offer. Select View offer to see your options.
+Excel greenbox text : The compensator has made your client an offer. Select View offer to see your options.</div>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='38' class='node then pass' status='pass'><b>Then</b>
+						<span class="bdd-step-name">Then counter offer is sent for revision and SLA is breached</span>
+							<div class='pre'>passed</div>
+					</li>
+				</ul>
+		</li>
+	</ul>
+</div>
+<div class='scenario node' test-id='39' status='pass'>
+	<span class='duration right label'>0h 3m 15s+639ms</span>
+	<div class='desc'>
+		<b>Scenario</b>
+		<span class="desc-text">Prouser withdraw the offer and replaces with new offer</span>
+	</div>
+	<ul class='steps'>
+		<li test-id='40' class='node given pass' status='pass'>
+			
+			<b>Given</b>
+			
+			<span class="bdd-step-name">Given Prouser has rejected offer to TPA</span>
+				<div class='pre'>Username : Pro212@mailinator.com
+Password : Password@123</div>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='41' class='node then pass' status='pass'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then Prouser withdraw the offer and replace with new offer</span>
+				<div class='pre'>The claim status is: Pending-RespondCounter</div>
+				<div class='pre'>Status matched..</div>
+				<div class='pre'>GreenBox text doesn't matched..</div>
+				<div class='pre'>System greenbox text : The compensator is reviewing your client's counter offer. You do not need to do anything else at this stage.
+Excel greenbox text : The compensator is reviewing your client's counter offer.
+You do not need to do anything else at this stage.</div>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='42' class='node then pass' status='pass'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then counter offer is sent for revision</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+	</ul>
+</div>
+<div class='scenario node' test-id='43' status='pass'>
+	<span class='duration right label'>0h 1m 45s+885ms</span>
+	<div class='desc'>
+		<b>Scenario</b>
+		<span class="desc-text">TPA accepts prouser counter offer</span>
+	</div>
+	<ul class='steps'>
+		<li test-id='44' class='node given pass' status='pass'>
+			
+			<b>Given</b>
+			
+			<span class="bdd-step-name">Given claimant request interm payment to TPA</span>
+				<div class='pre'>Username : autotpanew@mailinator.com
+Password : Password@123</div>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='45' class='node when pass' status='pass'>
+			
+			<b>When</b>
+			
+			<span class="bdd-step-name">When TPA accepts claimant counter offer</span>
+				<div class='pre'>The claim status is: Pending-RespondCounter</div>
+				<div class='pre'>Status matched..</div>
+				<div class='pre'>GreenBox text matched..</div>
+				<div class='pre'>System greenbox text : The claimant has provided a counter offer. You need to review this and make a decision.
+Excel greenbox text : The claimant has provided a counter offer. You need to review this and make a decision.</div>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='46' class='node then pass' status='pass'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then claim is sent to claimant</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+	</ul>
+</div>
+<div class='scenariooutline node' test-id='47' status='pass'>
+	<span class='duration right label'>0h 7m 37s+31ms</span>
+	<div class='desc'>
+		<b>ScenarioOutline</b>
+		<span class="desc-text">Prouser accepts Fee</span>
+	</div>
+	<ul class='steps'>
+		<li test-id='48' class='node scenario pass' status='pass'>
+			<div class='category-list'>
+				<span class='category label white-text'>@prouser</span>
+			</div>
+			
+			<b>Scenario</b>
+			
+			<span class="bdd-step-name">Prouser accepts Fee</span>
+				<div class='pre'>Prouser accepts Fee</div>
+			
+				<ul class='steps'>
+					<li test-id='49' class='node given pass' status='pass'><b>Given</b>
+						<span class="bdd-step-name">Given prouser review fee proposal</span>
+							<div class='pre'>Username : Pro212@mailinator.com
+Password : Password@123</div>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='50' class='node when pass' status='pass'><b>When</b>
+						<span class="bdd-step-name">When 'prouser' accepts revised offer</span>
+							<div class='pre'>The claim status is: Pending-ReviewFeesOffer</div>
+							<div class='pre'>Status matched..</div>
+							<div class='pre'>GreenBox text matched..</div>
+							<div class='pre'>System greenbox text : Check fees offer to review the compensator's response.
+Excel greenbox text : Check fees offer to review the compensator's response.</div>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='51' class='node then pass' status='pass'><b>Then</b>
+						<span class="bdd-step-name">Then Acknowledgement will be sent to compensator</span>
+							<div class='pre'>passed</div>
+					</li>
+				</ul>
+		</li>
+	</ul>
+</div>
+<div class='scenario node' test-id='52' status='pass'>
+	<span class='duration right label'>0h 2m 19s+70ms</span>
+	<div class='desc'>
+		<b>Scenario</b>
+		<span class="desc-text">Claimant goes to court for fees non-payment</span>
+	</div>
+	<ul class='steps'>
+		<li test-id='53' class='node given pass' status='pass'>
+			
+			<b>Given</b>
+			
+			<span class="bdd-step-name">Given SLA is breached for non-payment</span>
+				<div class='pre'>Username : Pro212@mailinator.com
+Password : Password@123</div>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='54' class='node when pass' status='pass'>
+			
+			<b>When</b>
+			
+			<span class="bdd-step-name">When prouser decides to go to court for fee settlement pending</span>
+				<div class='pre'>The claim status is: Pending-Acknowledgement</div>
+				<div class='pre'>Status matched..</div>
+				<div class='pre'>GreenBox text matched..</div>
+				<div class='pre'>System greenbox text : We have notified the Compensator of your Client's decision to accept the offer they made. Please be aware the Compensator will arrange payment of damages and/or fees amount accepted within 10 working days. If you have any questions about payment, contact the Compensator.
+Excel greenbox text : We have notified the Compensator of your Client's decision to accept the offer they made. Please be aware the Compensator will arrange payment of damages and/or fees amount accepted within 10 working days. If you have any questions about payment, contact the Compensator.</div>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='55' class='node then pass' status='pass'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then claim sent to compensator for reviewing documents selected</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+	</ul>
+</div>
+<div class='scenariooutline node' test-id='56' status='pass'>
+	<span class='duration right label'>0h 1m 59s+202ms</span>
+	<div class='desc'>
+		<b>ScenarioOutline</b>
+		<span class="desc-text">TPA acknowledges documents selected for court</span>
+	</div>
+	<ul class='steps'>
+		<li test-id='57' class='node scenario pass' status='pass'>
+			<div class='category-list'>
+				<span class='category label white-text'>@prouser</span>
+			</div>
+			
+			<b>Scenario</b>
+			
+			<span class="bdd-step-name">TPA acknowledges documents selected for court</span>
+				<div class='pre'>TPA acknowledges documents selected for court</div>
+			
+				<ul class='steps'>
+					<li test-id='58' class='node given pass' status='pass'><b>Given</b>
+						<span class="bdd-step-name">Given claimant selects court documents TPA</span>
+							<div class='pre'>Username : autotpanew@mailinator.com
+Password : Password@123</div>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='59' class='node when pass' status='pass'><b>When</b>
+						<span class="bdd-step-name">When TPA agrees to court documents when claim is in 'Pending-FeesListReview'</span>
+							<div class='pre'>The claim status is: Pending-FeesListReview</div>
+							<div class='pre'>Status matched..</div>
+							<div class='pre'>GreenBox text matched..</div>
+							<div class='pre'>System greenbox text : The claimant has selected documents for court that you need to review. Select View more details and follow the instructions.
+Excel greenbox text : The claimant has selected documents for court that you need to review. Select View more details and follow the instructions.</div>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='60' class='node then pass' status='pass'><b>Then</b>
+						<span class="bdd-step-name">Then claim is sent to claimant</span>
+							<div class='pre'>passed</div>
+					</li>
+				</ul>
+		</li>
+	</ul>
+</div>
+<div class='scenariooutline node' test-id='61' status='pass'>
+	<span class='duration right label'>0h 2m 46s+399ms</span>
+	<div class='desc'>
+		<b>ScenarioOutline</b>
+		<span class="desc-text">prouser Claimant acknowledges Compensators doc selection and case is resolved</span>
+	</div>
+	<ul class='steps'>
+		<li test-id='62' class='node scenario pass' status='pass'>
+			<div class='category-list'>
+				<span class='category label white-text'>@prouser</span>
+			</div>
+			
+			<b>Scenario</b>
+			
+			<span class="bdd-step-name">prouser Claimant acknowledges Compensators doc selection and case is resolved</span>
+				<div class='pre'>prouser Claimant acknowledges Compensators doc selection and case is resolved</div>
+			
+				<ul class='steps'>
+					<li test-id='63' class='node given pass' status='pass'><b>Given</b>
+						<span class="bdd-step-name">Given 'prouser' checks the documents uploaded by Compensator</span>
+							<div class='pre'>Username : Pro212@mailinator.com
+Password : Password@123</div>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='64' class='node when pass' status='pass'><b>When</b>
+						<span class="bdd-step-name">When 'prouser' submit the claim for court with claim 'Pending-FeesListAccept'</span>
+							<div class='pre'>The claim status is: Pending-FeesListAccept</div>
+							<div class='pre'>Status matched..</div>
+							<div class='pre'>GreenBox text matched..</div>
+							<div class='pre'>System greenbox text : The compensator has reviewed your client's fees dispute court documents. Select View more details and review their response.
+Excel greenbox text : The compensator has reviewed your client's fees dispute court documents. Select View more details and review their response.</div>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='65' class='node then pass' status='pass'><b>Then</b>
+						<span class="bdd-step-name">Then case is closed at court stage</span>
+							<div class='pre'>passed</div>
+					</li>
+				</ul>
+		</li>
+	</ul>
+</div>
+<div class='scenariooutline node' test-id='66' status='pass'>
+	<span class='duration right label'>0h 1m 23s+816ms</span>
+	<div class='desc'>
+		<b>ScenarioOutline</b>
+		<span class="desc-text">The claim is moved to 'Resolved-NonPayment'</span>
+	</div>
+	<ul class='steps'>
+		<li test-id='67' class='node scenario pass' status='pass'>
+			<div class='category-list'>
+				<span class='category label white-text'>@prouser</span>
+			</div>
+			
+			<b>Scenario</b>
+			
+			<span class="bdd-step-name">The claim is moved to 'Resolved-NonPayment'</span>
+				<div class='pre'>The claim is moved to 'Resolved-NonPayment'</div>
+			
+				<ul class='steps'>
+					<li test-id='68' class='node given pass' status='pass'><b>Given</b>
+						<span class="bdd-step-name">Given 'prouser' goes to court</span>
+							<div class='pre'>Username : Pro212@mailinator.com
+Password : Password@123</div>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='69' class='node when pass' status='pass'><b>When</b>
+						<span class="bdd-step-name">When prouser claim goes to dispute at court at 'Resolved-NonPayment'</span>
+							<div class='pre'>The claim status is: Resolved-NonPayment</div>
+							<div class='pre'>Status matched..</div>
+							<div class='pre'>GreenBox text doesn't matched..</div>
+							<div class='pre'>System greenbox text : The claimant has decided to issue court proceedings as they have not received payment. The claim is closed.
+Excel greenbox text : Your client has decided to go to court because they have not received the payment.  The claim is now closed on the portal. You can see details of your claim and download any documents, but you will not be able to make any changes.</div>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='70' class='node then pass' status='pass'><b>Then</b>
+						<span class="bdd-step-name">Then the claim will be resolved at court</span>
+							<div class='pre'>passed</div>
+					</li>
+				</ul>
+		</li>
+	</ul>
+</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<!-- subview left -->
+
+	<div class='subview-right left'>
+		<div class='view-summary'>
+			<h5 class='test-name'></h5>
+
+			<div id='step-filters' class="right">
+				<span class="blue-text" status="info" alt="info" title="info"><i class="material-icons">info_outline</i></span>
+				<span class="green-text" status="pass" alt="pass" title="pass"><i class="material-icons">check_circle</i></span>
+				<span class="red-text" status="fail" alt="fail" title="fail"><i class="material-icons">cancel</i></span>
+				<span class="red-text text-darken-4" status="fatal" alt="fatal" title="fatal"><i class="material-icons">cancel</i></span>
+				<span class="pink-text text-lighten-1" status="error" alt="error" title="error"><i class="material-icons">error</i></span>
+				<span class="orange-text" alt="warning" status="warning" title="warning"><i class="material-icons">warning</i></span>
+				<span class="teal-text" status="skip" alt="skip" title="skip"><i class="material-icons">redo</i></span>
+				<span status="clear" alt="Clear filters" title="Clear filters"><i class="material-icons">clear</i></span>
+			</div>
+		</div>
+	</div>
+	<!-- subview right -->
+
+</div>
+<!-- test view -->
+<div id='category-view' class='view hide'>
+
+	<section id='controls'>
+		<div class='controls grey lighten-4'>
+			<!-- search -->
+			<div class='chip transparent' alt='Search Tests' title='Search Tests'>
+				<a href="#" class='search-div'>
+					<i class='material-icons'>search</i> Search
+				</a>
+				
+				<div class='input-field left hide'>
+					<input id='search-tests' type='text' class='validate browser-default' placeholder='Search Tests...'>
+				</div>
+				
+			</div>
+			<!-- search -->
+		</div>
+	</section>
+
+	<div class='subview-left left'>
+		
+		<div class='view-summary'>
+			<h5>Categories</h3>
+			<ul id='category-collection' class='category-collection'>
+				
+				<li class='category displayed active'>
+					<div class='category-heading'>
+						<span class='category-name'>@prouser</span>
+						<span class='category-status right'>
+							<span class='label pass'>9</span>
+						</span>
+					</div>
+					<div class='category-content hide'>
+						<div class='category-status-counts'>
+							<span class='label green accent-4 white-text'>Passed: 9</span>
+							
+							
+						</div>
+					
+						<div class='category-tests'>
+							<table class='bordered table-results'>
+								<thead>
+									<tr>
+										<th>Timestamp</th>
+										<th>TestName</th>
+										<th>Status</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>Jul 27, 2021 10:11:21 PM</td>
+										<td class='linked' test-id='1'>Journey 31</td>
+										<td><span class='test-status pass'>pass</span></td>
+									</tr>
+									<tr>
+										<td>Jul 27, 2021 10:11:21 PM</td>
+										<td class='linked' test-id='3'>Journey 31.Prouser Submit a Claim as passenger in bus.Prouser Submit a Claim as passenger in bus</td>
+										<td><span class='test-status pass'>pass</span></td>
+									</tr>
+									<tr>
+										<td>Jul 27, 2021 10:24:37 PM</td>
+										<td class='linked' test-id='16'>Journey 31.Prouser uploads medical report.Prouser uploads medical report</td>
+										<td><span class='test-status pass'>pass</span></td>
+									</tr>
+									<tr>
+										<td>Jul 27, 2021 10:40:17 PM</td>
+										<td class='linked' test-id='26'>Journey 31.TPA withdraws the first offer.TPA withdraws the first offer</td>
+										<td><span class='test-status pass'>pass</span></td>
+									</tr>
+									<tr>
+										<td>Jul 27, 2021 10:43:28 PM</td>
+										<td class='linked' test-id='35'>Journey 31.Prouser rejects the first offer to Compensator.Prouser rejects the first offer to Compensator</td>
+										<td><span class='test-status pass'>pass</span></td>
+									</tr>
+									<tr>
+										<td>Jul 27, 2021 10:58:18 PM</td>
+										<td class='linked' test-id='48'>Journey 31.Prouser accepts Fee.Prouser accepts Fee</td>
+										<td><span class='test-status pass'>pass</span></td>
+									</tr>
+									<tr>
+										<td>Jul 27, 2021 11:08:17 PM</td>
+										<td class='linked' test-id='57'>Journey 31.TPA acknowledges documents selected for court.TPA acknowledges documents selected for court</td>
+										<td><span class='test-status pass'>pass</span></td>
+									</tr>
+									<tr>
+										<td>Jul 27, 2021 11:10:18 PM</td>
+										<td class='linked' test-id='62'>Journey 31.prouser Claimant acknowledges Compensators doc selection and case is resolved.prouser Claimant acknowledges Compensators doc selection and case is resolved</td>
+										<td><span class='test-status pass'>pass</span></td>
+									</tr>
+									<tr>
+										<td>Jul 27, 2021 11:13:07 PM</td>
+										<td class='linked' test-id='67'>Journey 31.The claim is moved to 'Resolved-NonPayment'.The claim is moved to 'Resolved-NonPayment'</td>
+										<td><span class='test-status pass'>pass</span></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</li>
+
+			</ul>
+		</div>
+	</div>
+
+	<div class='subview-right left'>
+		<div class='view-summary'>
+			<h5 class='category-name'></h5>
+		</div>
+	</div>
+</div>
+<!-- category view -->
+<!-- exception view -->
+<div id='dashboard-view' class='view hide'>
+	<div class='card-panel transparent np-v'>
+		<h5>Dashboard</h5>
+
+		<div class='row'>
+			<div class='col s2'>
+				<div class='card-panel r'>
+					Features
+					<div class='panel-lead'>1</div>
+				</div>
+			</div>
+			<div class='col s2'>
+				<div class='card-panel r'>
+					Scenarios
+					<div class='panel-lead'>15</div>
+				</div>
+			</div>
+			<div class='col s2'>
+				<div class='card-panel r'>
+					Steps
+					<div class='panel-lead'>46</div>
+				</div>
+			</div>
+			<div class='col s2'>
+				<div class='card-panel r'>
+					Start
+					<div class='panel-lead'>Jul 27, 2021 10:11:20 PM</div>
+				</div>
+			</div>
+			<div class='col s2'>
+				<div class='card-panel r'>
+			 		End
+			 		<div class='panel-lead'>Jul 27, 2021 11:14:34 PM</div>
+				</div>
+			</div>
+			<div class='col s2'>
+				<div class='card-panel r'>
+					Time Taken
+					<div class='panel-lead'>3,793,453ms</div>
+				</div>
+			</div>
+			<div class='col s4'>
+				<div class='card-panel dashboard-environment'>
+					<span class='right label cyan white-text'>Environment</span><p>&nbsp;</p>
+					
+					<table>
+						<tr>
+							<th>Name</th>
+							<th>Value</th>
+						</tr>
+							<tr>
+								<td>Project Name</td>
+								<td>MIB Whiplash</td>
+							</tr>
+							<tr>
+								<td>user</td>
+								<td>311077</td>
+							</tr>
+							<tr>
+								<td>os</td>
+								<td>Windows 7</td>
+							</tr>
+					</table>
+				</div>
+			</div>
+			<div class='col s4'>
+				<div class='card-panel dashboard-categories'>
+					<span class='right label cyan white-text'>Categories</span><p>&nbsp;</p>
+					
+					<table>
+						<tr>
+							<th>Name</th>
+							<th>Passed</th>
+							<th>Failed</th>
+							<th>Others</th>
+						</tr>
+						<tr>
+							<td>@prouser</td>
+							<td>9</td>
+							<td>0</td>
+							<td>0</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- dashboard view -->
+<!-- testrunner-logs view -->
+		</div>
+		<!-- container -->
+
+		<script>
+			var statusGroup = {
+				passParent: 1,
+				failParent: 0,
+				fatalParent: 0,
+				errorParent: 0,
+				warningParent: 0,
+				skipParent: 0,
+				exceptionsParent: 0,
+				
+				passChild: 15,
+				failChild: 0,
+				fatalChild: 0,
+				errorChild: 0,
+				warningChild: 0,
+				skipChild: 0,
+				infoChild: 0,
+				exceptionsChild: 0,
+				
+				passGrandChild: 46,
+				failGrandChild: 0,
+				fatalGrandChild: 0,
+				errorGrandChild: 0,
+				warningGrandChild: 0,
+				skipGrandChild: 0,
+				infoGrandChild: 0,
+				exceptionsGrandChild: 0,
+			};
+		</script>
+		
+			<script src='https://cdn.rawgit.com/anshooarora/extentreports-java/fca20fb7653aade98810546ab96a2a4360e3e712/dist/js/extent.js' type='text/javascript'></script>
+		
+		
+ 		<script type='text/javascript'>
+ 		</script>
+	</body>
+	
+</html>
